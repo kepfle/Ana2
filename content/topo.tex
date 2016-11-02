@@ -1,0 +1,476 @@
+\chapter{Topologische Grundlagen}
+\section{Normierte Vektorr\"aume}
+\subsection{Offene Mengen}
+\begin{definition}
+	Sei $ V $ ein $ \R- $Vektorraum. Unter einer \deftxt{Norm} auf $ V $ verstehen wir eine Funktion $ \norm{\cdot}\colon V\rightarrow [0,\infty[ $ mit:
+	\begin{enumerate}
+		\item[(N1)] \[ \norm{x}=0\Leftrightarrow x=0\forall x\in V \]
+		\item[(N2)] \[ \norm{tx}=|t|\norm{x}\forall x\in V\forall t\in\R \]
+		\item[(N3)] \[ \norm{x+y}\leq\norm{x}+\norm{y} \]
+	\end{enumerate}
+\end{definition}
+\begin{beispiel*}
+	\begin{enumerate}
+		\item[]
+		\item $ V=\R $, $ \norm{x}\coloneqq|x| $, $ x\in\R $.
+		\item $ V=\R^n $, $ \norm{x}_\infty\coloneqq\max_{1\leq l\leq n}|x|_l $, $ x=(x_1,...,x_n)\in\R^n $, definiert eine Norm auf $ \R^n $.
+		\item $ V=\R^n $, $ \norm{x}_1\coloneqq\sum_{l=1}^n|x_l| $, $ x=(x_1,...,x_n)\in\R^n $, definiert eine Norm auf $ \R^n $.
+		\item \[ V=C^0([a,b])=\lbrace f\colon[a,b]\rightarrow\K\mid f\text{ stetig}\rbrace \]
+		($ \K=\R $ oder $ \K=\C $) F\"ur $ f\in V $ sei \[ \norm{f}=\sup_{x\in[a,b]} |f(x)|=\max_{x\in[a,b]}|f(x)| \]
+		eine Norm auf $ V $.
+	\end{enumerate}
+\end{beispiel*}
+\begin{definition}
+	$ V $ sei ein $ \R- $Vektorraum. Unter einem \deftxt{Skalarprodukt} auf $ V $ verstehen wir eine Funktion $ \langle\cdot,\cdot\rangle\colon V\times V\rightarrow\R $ mit
+	\begin{enumerate}
+		\item \[ \langle x,y\rangle=\langle y,x\rangle, x,y\in V \]
+		\item \[ \langle x+\lambda y, u\rangle=\langle x,u\rangle+\lambda\langle y,u\rangle,\lambda\in\R, x,y,u\in V \]
+		\item \[ \langle x,y+\lambda z\rangle=\langle x,y\rangle+\lambda\langle x,z\rangle,\lambda\in\R, x,y,z\in V \]
+		\item \[ \langle x,x\rangle\geq 0, x\in V\qquad \langle x,x\rangle=0\Leftrightarrow x=0 \]
+	\end{enumerate}
+	In diesem Fall setze $ \norm{x}=\sqrt{\langle x,x\rangle} $.
+\end{definition}
+\begin{lemma}[Cauchy-Schwarzsche Ungleichung]
+	Sei $ V $ wie bisher und $ \langle\cdot, \cdot\rangle $ ein Skalarprodukt. Dann
+	\[ |\langle x,y\rangle|\leq\norm{x}\norm{y}\forall x,y\in V. \]
+	Dabei gilt Gleichheit, genau dann, wenn $ x=ty $ f\"ur ein $ t\in\R $.
+\end{lemma}
+\begin{beweis}
+	$ a,b\in\R $. Dann ist \[ \norm{a+b}^2=\langle a+b,a+b\rangle=\langle a,a+b\rangle+\langle b,a+b\rangle=\langle a,a\rangle+\langle a,b\rangle+\langle b,a\rangle+\langle b,b\rangle=\norm{a}^2+\norm{b}^2+2\langle a,b\rangle. \]
+	Ist $ y=0 $, so ist nichts zu tun. Sei also $ y\neq 0 $ ($ \norm{y}>0 $).
+	\[ 0\leq\norm{x-\frac{\langle x,y\rangle}{\norm{y}^2}y}^2=\norm{x}^2+\frac{\langle x,y\rangle^2}{\norm{y}^2}-2\left\langle x,\frac{\langle x,y\rangle y}{\norm{y}^2}\right\rangle=\norm{x}^2+\frac{\langle x,y\rangle^2}{\norm{y}^2}-2\langle x,y\rangle\frac{1}{\norm{y}^2}\langle x,y\rangle=\norm{x}^2-\frac{\langle x,y\rangle^2}{\norm{y}^2} \]
+	Umstellen liefert
+	\[ \langle x,y\rangle^2\leq\norm{x}\norm{y}^2. \]
+	Gilt Gleichheit, so ist $ \norm{x-\frac{\langle x,y\rangle}{\norm{y}^2}}=0 $, also $ x=\frac{\langle xx,y\rangle}{\norm{y}^2}y\eqqcolon t $. Ist $ x=ty $, so $ \langle x,y\rangle=t\norm{y}^2 $.
+\end{beweis}
+\begin{lemma}
+	$ (V,\langle\cdot,\cdot\rangle) $ sei ein $ \R- $Vektorraum mit Skalarprodukt. Dann definiert $ \norm{x}=\sqrt{\langle x,x\rangle} $, $ x\in V $, eine Norm auf $ V $.
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item[(N1), (N2)] klar. (N1) folgt aus d), (N2):
+		\[ \sqrt{\langle tx, tx\rangle}=\sqrt{t^2\langle x,x\rangle}=|t|\norm{x}\forall t\in\R\forall x\in V \]
+	    \item[(N3)] \[ \norm{x+y}^2=\norm{x}^2+\norm{y}^2+2\langle x,y\rangle\leq\norm{x}^2+\norm{y}^2+2\norm{x}\norm{y}=(\norm{x}+\norm{y})^2 \]
+	\end{enumerate}
+\end{beweis}
+\begin{beispiel*}
+	Auf $ \R^n $ definiere $ \langle x,y\rangle=x_1y_1+...+x_ny_n $. Dann ist $ \langle\cdot, \cdot\rangle $ ein Skalarprodukt auf $ \R^n $.
+	\[ \norm{x}=\sqrt{\sum_{l=1}^{n}x^2_l} \]
+	ist die euklidische Norm.
+\end{beispiel*}
+\begin{definition}
+	Sei $ (V,\norm{\cdot}) $ ein normierter Vektorraum, dann definiere f\"ur $ a\in V $, $ r>0 $ die \deftxt{Kugel um $ a $ mit Radius $ r $} als
+	\[ B(a,r)\coloneqq\langle x\in V\mid\norm{x-a}<r\rangle. \]
+\end{definition}
+\begin{beispiel*}
+	\begin{enumerate}
+		\item[]
+		\item $ V=\R $, $ \norm{\cdot}=|\cdot| $, $ B(a,r)=]a-r,a-r[ $.
+		\item $ V=\R^n $, $ \norm{\cdot}= $euklidische Norm, $ B_2(a,r)= $Kreisscheibe um $ a $ mit Radius $ r $.
+		\item $ V=\R^n $, $ \norm{\cdot}=\norm{\cdot}_\infty $, \[ B_n(a,r)=\lbrace x\in\R^n\mid \norm{x-a}_\infty<r\rbrace=\lbrace x=(x_1,...,x_n)\mid |x_l-a_l|<r\forall 1\leq l\leq n\rbrace \]
+	\end{enumerate}
+\end{beispiel*}
+\begin{definition}
+	$ (V,\norm{\cdot}) $ sei ein normierter Raum. Sei $ M\subset V $ nicht leer. $ x\in M $ hei\ss t \deftxt{innerer Punkt von $ M $}, wenn ein $ \delta>0 $ existiert, so dass $ B(x,\delta)\subset M $.
+	\[ \mathring{M}\coloneqq\lbrace x\in M\mid x\text{ innerer Punkt von }M\rbrace \]
+	Wir nennen eine Menge $ U\subset V $ offen, wenn $ \mathring{U}=U $.
+\end{definition}
+\begin{lemma}
+	Sei $ (V,\norm{\cdot}) $ ein normierter Vektorraum. Dann ist f\"ur $ a\in V $ und $ r>0 $ die Kugel $ B(a,r) $ offen. Genauer ist $ y\in B(a,r) $, so $ B(y,\rho)\subset B(a,r) $, wenn nur $ 0<\rho<r-\norm{a-y} $.
+\end{lemma}
+\begin{beweis}
+	Sei $ y\in B(a,r) $, $ z\in B(y,\rho) $.
+	\[ \norm{z-a}=\norm{y-a+z-y}\leq\norm{y-a}+\norm{z-y}<\norm{y-a}+\rho<r \]
+	sobald $ \rho<r-\norm{y-a} $.
+\end{beweis}
+\begin{lemma}
+	$ (V,\norm{\cdot}) $ wie zuvor, $ M, M_1,M_2\subset V $. Dann gilt:
+	\begin{enumerate}
+		\item Ist $ U\subset M $ offen, so $ U\subset\mathring M $.
+		\item $ (M_1\cap M_2)^\circ=\mathring{M}_1\cap \mathring{M}_2 $, $ (M_1\cup M_2)^\circ\supset \mathring{M}_1\cup\mathring{M}_2 $. 
+	\end{enumerate}
+\end{lemma}
+\subsection{Konvergente Folgen}
+$ (V,\norm{\cdot}) $ sei ein normierter Vektorraum.
+\begin{definition}
+	\bullshit
+	\begin{enumerate}
+		\item Wir nennen eine Folge $ (x_k)_{k\in V} $ \deftxt{konvergent gegen $ x_0\in V $}, wenn \[ \forall\e>0\exists n_\e\in\N: x_k\in B(x_0,\e)\text{ f\"ur }k\geq n_\e. \]
+		In diesem Falle:
+		\[ x_0=\lim_{k\to\infty}x_k. \] 
+		\item Sei $ (x_n)_n\subset V $. Dann hei\ss t $ a\in V $ \deftxt{H\"aufungswert} f\"ur $ (x_n)_n $, wenn f\"ur unendlich viele $ n $ gilt $ x_n\in B(a,\e) $, wie auch immer $ \e>0 $ gew\"ahlt war.\\
+		Konvergiert $ (x_n)_n $ gegen $ a $, so ist $ a $ der einzige H\"aufungswert f\"ur $ (x_n)_n $. 
+	\end{enumerate}
+\end{definition}
+\begin{lemma}
+	$ (x_n)_n\subset V $ sei eine Folge. Dann konvergiert $ (x_n)_n $ gegen $ x_0\in V $ genau dann, wenn
+	\[ \lim_{n\to\infty}\norm{x_n-x_0}=0. \]
+	Konvergiert $ (x_n)_n $ gegen $ y_0\in V $, so $ y_0=x_0 $.
+\end{lemma}
+\begin{lemma}
+	Genau dann ist $ a\in V $ ein H\"aufungswert der Folge $ (x_n)_n $, wenn $ (x_n)_n $ eine Teilfolge $ (x_{n_k})_k $ mit Grenzwert $ a $ hat.
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item Eine Teilfolge $ (x_{n_k})_k\subset (x_n)_n $ konvergiere gegen $ a $. Zu $ \e>0 $ w\"ahle $ k_\e\in\N $ mit $ x_{n_k}\in B(a,\e) $ f\"ur $ k\geq k_\e $. Somit ist $ a $ ein H\"aufungswert.
+		\item Sei $ a\in V $ ein H\"aufungswert f\"ur $ (x_n)_n $. Zu $ \e\coloneqq\frac{1}{k} $ gibt es $ x_{n_k}\in B\left(a,\frac{1}{k}\right) $. Dann ist aber $ a=\lim_{k\to\infty}x_{n_k} $.  
+	\end{enumerate}
+\end{beweis}
+\begin{bemerkung*}[Notation]
+	F\"ur $ x=(x_1,...,x_n)\in\R^n $ setzen wir
+	\[ |x|\coloneqq\sqrt{\sum_{l=1}^n x_l^2}. \]
+\end{bemerkung*}
+\begin{lemma}
+	$ (x_k)_k\subset\R^n $ konvergiert gegen $ a\in\R^n $ genau dann, wenn
+	\[ \lim_{k\to\infty} x_{k,l}=a_l, 1\leq l\leq n. \]
+\end{lemma}
+\begin{beweis}
+	\[ |x_{k,l}-a_l|\leq |x_k-a|\leq\sum_{l=1}^{n}|x_{k,l}-a_l| \]
+\end{beweis}
+\begin{lemma}
+	\bullshit
+	\begin{enumerate}
+		\item Sind die Folgen $ (x_k)_k, (y_k)_\subset V $ konvergent, so
+		\[ \lim_{k\to\infty}(x_k+\alpha y_k)=\lim_{k\to\infty} x_k+\alpha\lim_{k\to\infty}y_k. \]
+		\item Wird $ \norm{\cdot} $ durch ein Skalarprodukt $ \langle\cdot,\cdot\rangle $ induziert, so
+		\[ \lim_{k\to\infty}\langle x_k,y_k\rangle=\langle x_0,y_0\rangle \]
+		wenn $ x_k\to x_0 $, $ y_k\to y_0 $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item \[ \norm{x_k+\alpha y_k-(x_0+\alpha y_0)}\leq\norm{x_k-x_0}+|\alpha|\norm{y_k-y_0}\xrightarrow{k\to\infty}0 \]
+		\item \begin{align*} |\langle x_k,y_k\rangle-\langle x_0,y_0\rangle|&=|\langle x_k-x_0,y_k\rangle+\langle x_0,y_k-y_0\rangle|\\&\leq\norm{x_k-x_0}\norm{y_k}+\norm{x_0}\norm{y_k-y_0}\\&\leq\norm{x_k-x_0}(\norm{x_0}+\norm{y_k-y_0})+\norm{x_0}\norm{y_k-y_0}\xrightarrow{k\to\infty}0
+		 \end{align*}
+	\end{enumerate}
+\end{beweis}
+\begin{definition}
+	\bullshit
+	\begin{enumerate}
+		\item 	$ (x_n)_n\subset V $ hei\ss t \deftxt{Cauchy-Folge}, wenn $ \forall\e>0\exists n_\e\in\N $ mit $ \norm{x_k-x_l}<\e $, wenn $ k,l\geq n_\e $.
+		\item Wir nennen eine Folge $ (x_n)_n $ \deftxt{beschr\"ankt}, wenn ein $ R $ existiert mit $ \norm{x_n}\leq R $ f\"ur alle $ n $.
+	\end{enumerate}
+\end{definition}
+\begin{lemma}
+	\bullshit
+	\begin{enumerate}
+		\item Jede in $ V $ konvergente Folge $ (x_n)_n $ ist eine Cauchy-Folge.
+		\item Jede Cauchy-Folge $ (x_n)_n $ ist beschr\"ankt.
+		\item Ist $ a $ ein H\"aufungswert der Cauchy-Folge $ (x_n)_n $, so ist $ a=\lim x_n $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item Sei $ x_0=\lim x_k $.Zu $ \e>0 $ w\"ahle $ n_\e\in\N $ mit \[ \norm{x_n-x_0}<\frac{\e}{2}\forall n\geq n_\e. \]
+		F\"ur $ k,l\geq n_\e $ wird dann
+		\[ \norm{x_k-x_l}\leq\norm{x_k-x_0}+\norm{x_l-x_0}<\e. \]
+		\item Cauchy-Kriterium f\"ur $ \e=1 $:
+		\[ \exists n_1\in\N:\norm{x_n-x_{n_1}}\leq 1\forall n\geq n_1. \]
+		\[ \norm{x_n-x_{n_1}}\leq R\coloneqq 1+\sum_{p=1}^{n_1}\norm{x_p-x_{n_1}}\forall n\geq 1. \]
+		\item W\"ahle Teilfolge $ (x_{n_k})\subset (x_n)_n $, $ \lim_{k\to\infty} x_{n_k}=a $. Zu $ \e>0 $ sei $ p_\e\geq 1 $:
+		\[ \norm{x_r-x_s}<\frac{\e}{2}, r,s\geq p_\e\]
+		\[ \norm{x_r-a}\leq \norm{x_r-x_{n_{k_0}}}+\norm{x_{n_{k_0}}-a} \]
+		W\"ahle $ k_0\gg 1 $ und $ n_{k_0}\geq p_\e $ mit $ \norm{x_{n_{k_0}}-a}<\frac{\e}{2} $. Dann ist $ \norm{x_r-a}<\e $, wenn $ r\geq n_{k_0} $.
+	\end{enumerate}
+	\vspace{-22pt}
+\end{beweis}
+\begin{definition}
+	$ (V,\norm{\cdot}) $ hei\ss t \deftxt{vollst\"andig} (Banachraum), wenn jede Cauchy-Folge $ (x_k)_k\subset V $ in $ V $ einen Grenzwert hat.
+\end{definition}
+\begin{satz}
+	Der Raum $ \R^n $ ist mit $ |\cdot| $ vollst\"andig.
+\end{satz}
+\begin{beweis}
+	\begin{description}
+		\item[$ n=1 $:] Ana 1; angenommen $ (\R^{n-1},|\cdot|) $ sei vollst\"andig. Ist $ (x_k)_k $ eine Cauchy-Folge in $ \R^n $, so schreibe $ x_k=(x_k',x_{k,n}) $. Da
+		\[ \frac{|x_k'-x_l'|+|x_{k,n}-x_{l,n}|}{2}\leq|x_k-x_l|\leq |x_k'-x_l'|+|x_{k,n}-x_{l,n}| \]
+		sind $ (x_k')_k $ und $ (x_{k,n})_k $ Cauchy-Folgen, haben also einen Grenzwert $ x' $ bzw. $ x_n $.
+		\[ |x_k-x|\leq|x_k'-x'|+|x_{k,n}-x_n|\xrightarrow{k\to\infty}0 \]
+	\end{description}
+\end{beweis}
+\subsection{Abgeschlossene und kompakte Mengen}
+$ (V,\norm{\cdot}) $ sei ein normierter Vektorraum.
+\begin{definition}
+	\bullshit
+	\begin{enumerate}
+		\item $ A\subset V $ hei\ss t \deftxt{abgeschlossen}, wenn $ V\setminus A $ offen ist.
+		\item $ A $ hei\ss t \deftxt{beschr\"ankt}, wenn $ A\subset B(0,R) $ f\"ur geeignetes $ R>0$.
+		\item $ A $ hei\ss t \deftxt{kompakt}, wenn zu jeder Familie $ (U_i)_{i\in I} $ offener Mengen mit $ A\subset\bigcup_{i\in I} U_i $ eine endliche Menge $ J\subset I $ mit $ A\subset\bigcup_{j\in J}U_j $ gefunden werden kann.
+		\item $ A $ hei\ss t \deftxt{folgenkompakt}, wenn jede Folge $ (x_n)_n\subset A $ einen H\"aufungswert $ a_0\in A $ hat.
+	\end{enumerate}
+\end{definition}
+\begin{definition}
+	\bullshit
+	\begin{enumerate}
+		\item $ A\subset V $ sei eine Menge. Dann hei\ss t $ a_0\in V $ \deftxt{H\"aufungspunkt von $ A $}, wenn $ \forall r>0 $ die Menge $ A\cap(B(a_0,r)\setminus\lbrace a_0\rbrace)\neq\emptyset $ ist.
+		\item $ A\subset V $, dann $ \bar A\coloneqq $Durchschnitt aller abgeschlossenen Mengen $ F $ mit $ A\subset F $ (\deftxt{abgeschlossene H\"ulle von $ A $}).
+	\end{enumerate}
+\end{definition}
+\begin{lemma}
+	$ A\subset V $. Dann sind \"aquivalent:
+	\begin{enumerate}
+		\item $ A $ ist abgeschlossen.
+		\item Jeder H\"aufungspunkt von $ A $ liegt in $ A $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{description}
+		\item[i)$ \Rightarrow $ii)] Sei $ a_0\in V $ H\"aufungspunkt von $ A $, aber $ a_0\notin A $. Dann ist $ a_0\in V\setminus A $ mit $ V\setminus A $ offen. Also $ \exists r>0: B(a_0,r)\subset V\setminus A $ und $ A\cap B(a_0,r)=\emptyset.\lightning $
+		\item[ii)$ \Rightarrow $i)] Sei $ a_0\in V\setminus A $, g\"abe es kein $ r>0 $ mit $ B(a_0,r)\subset V\setminus A $, so w\"ahle zu $ r\coloneqq\frac{1}{k} $ ein $ x_k\in A\cap B\left(a_0,\frac{1}{k}\right) $, sogar $ x_k\neq a_0 $. Is $ \delta>0 $ beliebig, so w\"ahle $ k>\frac{1}{\delta} $. Dann ist $ x_k\in (B(a_0,\delta)\setminus\lbrace a_0\rbrace)\cap A $. Also ist $ a_0 $ H\"aufungspunkt f\"ur $ A $, also $ a_0\in A.\lightning $
+	\end{description}
+\end{beweis}
+\begin{bemerkung*}
+	\"Aquivalent:
+	\begin{enumerate}
+		\item $ A\subset V $ abgeschlossen.
+		\item Ist $ a_0\in V $, $ (a_k)_k\subset A $, $ a_0=\lim_{k\to\infty}a_k $, so $ a_0\in A $.
+	\end{enumerate}
+\end{bemerkung*}
+\begin{lemma}
+	Sei $ A\subset V $, dann ist \[ \bar A=B\coloneqq A\cup\lbrace a_0\in V\mid a_0\text{ ist H\"aufungspunkt von }A\rbrace. \]
+\end{lemma}
+\newpage
+\begin{beweis}
+	$ B $ ist abgeschlossen: Sei $ b_0 $ ein H\"aufungspunkt f\"ur $ B $. Zeige: $b_0\in B $.\\
+	Sei $ r>0 $ beliebig. Sei $ b_0\notin A $. W\"ahle $ y\in B\cap\left(B\left(b_0,\frac{r}{2}\right)\setminus \lbrace b_0\rbrace\right) $, ist $ y\in A $, so $ A\cap\left(B\left(b_0,\frac{r}{2}\right)\setminus\lbrace b_0\rbrace\right)\ni y $. Dann ist $ b_0 $ H\"aufungspunkt von $ A $.\\
+	Sei $ y\notin A $, da $ y\in B $, ist $ y $ H\"aufungspunkt von $ A $. Da $ y\neq b_0 $ existiert
+	\[ \delta\coloneqq\frac{1}{2}\norm{y-b_0}>0. \]
+	Sei $ \rho=\min\left\lbrace\delta,\frac{r}{2}\right\rbrace $. W\"ahle $ x\in (B(y,\rho)\setminus\lbrace y\rbrace)\cap A $. Dann
+	\[ \norm{x-b_0}\leq\norm{x-y}+\norm{y-b_0}<\rho+\frac{\delta}{2}\leq r. \]
+	W\"are $ x=b_0 $, so
+	\[ 2\delta=\norm{y-b_0}=\norm{y-x}<\rho\leq\delta\lightning \]
+	Also ist $ x\in (B(b_0,r)\setminus\lbrace b_0\rbrace)\cap A $. In beiden F\"allen ist $ (B(b_0,r)\setminus\lbrace b_0\rbrace)\cap A\neq\emptyset $. Also ist $ b_0 $ H\"aufungspunkt von $ A $, also $ b_0\in B $. Somit ist $ \bar B=B $, $ A\subset B $ und $ \bar A\subset B $.\\
+	Zeige noch: $ B\subset\bar A $. 
+	Sei $ F $ abgeschlossen, $ A\subset F $. Sei $ b\in B $, $ b\in A $. Dann ist $ b\in F $. Ist $ b\notin A $, so $ \exists $Folge $ (b_k)_k\subset A $, $ b=\lim_{k\to\infty}b_k $. Da $ b_k\in F $ f\"ur alle $ k $, folgt aus der Bemerkung $ b\in F $. Also $ B\subset F $. W\"ahle $ F=\bar A $, so ist $ B\subset\bar A $.
+\end{beweis}
+\begin{definition}
+	$ A\subset V $, dann hei\ss t $ \partial A\coloneqq\bar A\setminus\mathring A $ der \deftxt{Rand} von $ A $.
+\end{definition}
+\begin{bemerkung*}
+	F\"ur $ A\subset V $ ist stets \[ \partial A=\bar A\cap \overline{A^c}=\bar A\cap (\overline{V\setminus A}). \]
+\end{bemerkung*}
+\begin{beispiel*}
+	\begin{enumerate}
+		\item[]
+		\item $ A=B_2(0,r)\Rightarrow\partial A=\lbrace x\in\R^2\mid |x|=r\rbrace $.
+		\item $ V=\R $, $ A=\Q\Rightarrow\partial A=\R $.
+	\end{enumerate}
+\end{beispiel*}
+\begin{bemerkung*}[Erinnerung]
+	$ K\subset V $ hei\ss t \deftxt{folgenkompakt}, wenn jede Folge $ (x_\nu)_\nu\subset K $ eine in $ K $ konvergente Teilfolge hat.\\
+	$ K\subset V $ hei\ss t \deftxt{\"uberdeckungskompakt}, wenn es f\"ur jede \"Uberdeckung $ (U_i)_{i\in I} $ von $ K $ durch offene Mengen $ U_i\subset V $ $ i_1,...,i_m $ gibt, so dass $ K\subset U_{i_1}\cup...\cup U_{i_m} $.
+\end{bemerkung*}
+\begin{lemma}
+	$ K\subset V $ sei kompakt. Dann ist
+	\begin{enumerate}
+		\item $ K $ beschr\"ankt.
+		\item $ K $ abgeschlossen.
+		\item $ K $ folgenkompakt.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item $ (B(0,n))_{n\geq 1} $ ist offene \"Uberdeckung f\"ur $ K $. Dann $ B(0,n_0)\supset K $ f\"ur gen\"ugend gro\ss es $ n_0 $.
+		\item Sei $ (x_n)_n\subset K $ eine Folge, so dass $ x_0=\lim_{n\to\infty} x_n $ existiert. Dann ist $ x_0\in K $, anderenfalls w\"are $ x_0\notin K $, so w\"are $ (U_\e)_{\e>0} $ eine offene \"Uberdeckung f\"ur $ K $, wenn $ U_\e\coloneqq\lbrace x\in V\mid\norm{x-x_0}>\e\rbrace $. Aber dann ist $ K\subset U_{\e_0} $ f\"ur ein gen\"ugend klein gew\"ahltes $ \e_0>0 $, $ \norm{x_n-x_0}\geq\e_0$. $\lightning $
+		\item Sei $ (x_n)_n\subset K $ eine Folge ohne H\"aufungspunkt in $ K $. Dann sind unendlich viele der $ x_n $ paarweise verschieden. Ist $ x\in K $, so gibt es $ \e_x>0 $ so dass $ B(x,\e_x) $ nur endlich viele der $ x_n $ enth\"alt. Dann ist $ (B(x,\e_x))_{x\in K} $ eine offene \"Uberdeckung von $ K $, also finden wir $ \tilde x_1,...,\tilde x_r\in K $ mit $ K\subset\bigcup_{l=1}^r B(\tilde x_k,\e_{\tilde x_l}) $. Aber die linke Seite enth\"alt unendlich viele der $ x_n $, die rechte nur endlich viele. $ \lightning $
+	\end{enumerate}
+\end{beweis}
+\begin{lemma}
+	Sei $ K\subset V $ folgenkompakt und $ (U_i)_{i\in I} $ eine \"Uberdeckung von $ K $ durch offene Mengen $ U_i\subset V $. Dann gibt es ein $ \delta>0 $ mit:
+	\[ \forall x\in K\exists i=i_x\in I\text{ mit }B(x,\delta)\subset U_{i_x}. \]
+\end{lemma}
+\begin{beweis}
+	Sonst g\"abe es zu $ k\in\N $ ein $ x_k\in K $ mit $ B\left(x_k,\frac{1}{k}\right)\not\subset U_i $ f\"ur alle $ i\in I $. W\"ahle $ (x_{k_l})_l\subset (x_n)_n $ mit $ x_0=\lim_{l\to\infty}x_{k_l}\in K $, sei $ i_0\in I $, $ x_0\in U_{i_0} $. W\"ahle $ \e>0 $ mit $ B(x_0,2\e)\subset U_{i_0} $. Ist dann $ y\in B\left(x_{k_l},\frac{1}{k_l}\right) $, so
+	\[ \norm{y-x_0}\leq\norm{x_0-x_{k_l}}+\norm{y-x_{k_l}}\leq\norm{x_0-x_{k_l}}+\frac{1}{k_l}<\e+\frac{1}{k_l}<2\e. \]
+	Dann gilt $ B\left(x_{k_l},\frac{1}{k_l}\right)\subset B(x_0,2\e)\subset U_{i_0} $. $ \lightning $
+\end{beweis}
+\begin{satz}
+	Jede folgenkompakte Menge $ K\subset V $ ist kompakt.
+\end{satz}
+\begin{beweis}
+	Sei $ K\subset \bigcup_{i\in I}U_i $, $ U_i $ offen. Es gibt ein $ \delta>0 $ mit:
+	\[ \forall x\in K\exists i_x\in I: B(x,\delta\subset U_{i_x}). \]
+	Behauptung: F\"ur geeignete $ x_1,...,x_N\in K $ ist schon $ K\subset\bigcup_{l=1}^N B(x_l,\delta) $.\\
+	Angenommen, es sei nicht so. Dann $ K\not\subset B(z_1,\delta) $ ($ z_1\in K $ beliebig). Also $ \exists z_2\in K $ mit $ \norm{z_1-z_2}\geq\delta $. Auch $ K\not\subset B(z_1,\delta)\cup B(z_2,\delta) $, w\"ahle $ z_3\in K $ mit $ \norm{z_3-z_l}\geq\delta $, $ l=1,2 $, induktiv definiere $ z_1,...,z_r\in K $ mit $ \norm{z_i-z_j}\geq\delta $ f\"ur $ i\neq j $.\\
+	Die Folge $ (z_n)_n\subset K $ hat dann keinen H\"aufungswert. $ \lightning $
+\end{beweis}
+\begin{satz}[Bolzano-Weierstra\ss]
+	In $ (\R^n,|\cdot|) $ hat jede beschr\"ankte Folge $ (x_k)_k $ einen H\"aufungswert.
+\end{satz}
+\begin{beweis}
+	$ x_k=(x_{k,1},...,x_{k,n}) $, w\"ahle aus $ (x_{k,1})_k $ eine konvergente Teilfolge $ (x_{k_{l,1},1})_l $ aus. Dann ist $ (x_{k_{l,1},2})_l $ beschr\"ankt, hat also eine konvergente Teilfolge $ (x_{k_{l,2},2})_l $. Aus $ (x_{k_{l,2},3})_l $ w\"ahle konvergente Teilfolge $ (x_{k_{l,3},3})_l $ aus. So fahre fort und erhalte Teilfolge $ (x_{k_{l,n}})_l $, so dass $ (x_{k_{l,n},j})_j $ konvergiert f\"ur alle $ 1\leq j\leq n $.
+\end{beweis}
+\newpage
+\begin{beweis}[Alternativer Beweis]
+	Induktion nach $ n $.\\
+    $ n=1 $: $ \surd $\\
+	Angenommen der Satz gelte in $ \R^{n-1} $. Schreibe $ x_k=(x_k', x_{k,n})\in\R^{n-1}\times\R $,  dann sind $ (x'_k)_k\subset\R^{n-1} $ und $ x_{k,n}\subset\R $ beschr\"ankt. W\"ahle Teilfolge $ (x'_{k_l})_l\subset(x'_k)_k $, die konvergiert, etwa gegen $ x_0' $, $ (x_{k_l,n})_l $ hat ebenfalls eine gegen ein $ x_{0,n}\in\R $ konvergente Teilfolge $ (x_{k_{l_p},n})_p $. Dann konvergiert $ (x_{k_{l_p}})_p $ gegen $ (x_0', x_{0,n}). $ 
+\end{beweis}
+\begin{satz}[Heine-Borel]
+	Im $ \R^n $ ist jede Menge $ K\subset\R^n $ genau dann kompakt, wenn sie abgeschlossen und beschr\"ankt ist.
+\end{satz}
+\begin{beweis}
+	Zu zeigen: Ist $ K $ abgeschlossen und beschr\"ankt, so hat jede Folge $ (x_k)_k\subset K $ einen H\"aufungswert $ x^\ast\in K $.\\
+	Nach 1.1.3.9 Hat $ (x_k)_k $ einen H\"aufungswert $ x^\ast\in\R^n $ (da $ K $ beschr\"ankt). $ K $ abgeschlossen, $ x^\ast\in K $.
+\end{beweis}
+\begin{beispiel*}
+	Sei $ U\subset\R $ offen.
+	\[ BC^0(U)\coloneqq\lbrace f\colon U\rightarrow\R\mid f\text{ stetig und beschr\"ankt}\rbrace \]
+	ist ein $ \R- $Vektorraum,
+	\[ \norm{f}\coloneqq\sup\lbrace |f(x)|\mid x\in U \]
+	definiert auf $ BC^0(U) $ eine Norm. $ (BC^0(U),\norm{\cdot}) $ ist sogar vollst\"andig.\\
+	Speziell: $ U=\R $, $ K\coloneqq\lbrace f\in BC^0(U)\mid \norm{f}\leq 1\rbrace $ ist abgeschlossen und beschr\"ankt.\\
+	Sei jetzt
+	\[ f_0(x)\coloneqq \begin{cases}
+	x,&0\leq x<1\\
+	1,&1<x<2\\
+	3-x,&2\leq x\leq 3\\
+	0,& x\notin[0,3]
+	\end{cases},\quad f_n(x)\coloneqq f_0(x+3n). \]
+	Dann $ (f_n)_n\subset K $, aber $ \norm{f_k-f_n}=1 $ f\"ur $ k\neq n $. $ (f_n)_n $ hat keine konvergente Teilfolge. Also ist $ K $ nicht kompakt.
+\end{beispiel*}
+\newpage
+\begin{definition}
+	Eine offene Menge $ \Omega\subset V $ hei\ss t \deftxt{zusammenh\"angend} oder \deftxt{Gebiet}, wenn gilt: Sind $ U_1, U_2\subset V $ offen, $ U_1\cap U_2=\emptyset $, so folgt aus $ \Omega=U_1\cup U_2 $ schon $ U_1=\Omega $ oder $ U_2=\Omega $.
+\end{definition}
+\begin{lemma}
+	Sei $ \Omega\subset V $ ein Gebiet, die Funktion $ f\colon\Omega\rightarrow\R $ habe die Eigenschaft: Ist $ a\in\Omega $, so gibt es $ r>0 $ mit $ B(a,r)\subset\Omega $ und $ f(x)=f(a) $ f\"ur $ x\in B(a,r) $. Dann ist $ f $ konstant auf $ \Omega $.
+\end{lemma}
+\begin{beweis}
+	Sei $ a_0\in\Omega $, $ U_1\coloneqq\lbrace x\in\Omega\mid f(x)=f(a_0)\rbrace $, $ U_2\coloneqq\Omega\setminus U_1 $ sind offen (Ist das gezeigt, haben wir $ U_1\cup U_2=\Omega $, $ U_1\cap U_2=\emptyset $, also $ U_1=\Omega $, da $ U_1\ni a_0 $, $ U_1\neq\emptyset $).\\
+	Ist $ x_1\in U_1 $, $ r>0 $ mit $ B(x_1,r)\subset\Omega $ und $ f(x)=f(x_1) $ auf $ B(x_1,r) $, also $ B(x_1,r)\subset U_1 $. Also ist $ U_1 $ offen.\\
+	Ist $ x_2\in U_2 $, $ r_2>0 $ mit $ B(x_2, r_2)\subset\Omega $ und $ f=f(x_2) $ auf $ B(x_2,r_2) $. Somit $ B(x_2,r_2)\subset U_2 $. Also ist auch $ U_2 $ offen.
+\end{beweis}
+\section{Stetige Abbildungen}
+\changesection
+Sei $ (V,\norm{\cdot}) $ stets ein normierter Vektorraum.
+\begin{definition}
+	Sei $ (Y,\norm{\cdot}_Y) $ ein normierter Vektorraum. Ist $ M\subset V $, $ f\colon M\rightarrow Y $ eine Abbildung, so hei\ss t $ f $ \deftxt{stetig} in $ x_0\in M $, wenn zu jedem $ \e>0 $ ein $ \delta>0 $ gefunden werden kann, so dass f\"ur alle $ x\in M\cap B(x_0,\delta) $ gilt $ f(x)\in B(f(x_0),\e) $. Alternativ: \[ \norm{x-x_0}<\delta\Rightarrow\norm{f(x)-f(x_0)}<\e\forall x\in M. \] 
+\end{definition}
+\begin{satz}
+	Sei $ M\subset V $, $ x_0\in M $, $ f\colon M\rightarrow Y $. Dann ist $ f $ in $ x_0 $ stetig, wenn f\"ur alle $ (x_k)_k\subset M $, $ \lim x_k=x_0 $, gilt $ \lim f(x_k)=f(x_0) $.
+\end{satz}
+\begin{beweis}
+	\begin{description}
+		\item['$ \Rightarrow $':] Sei $ (x_k)_k\subset M $, $ \lim x_k=x_0 $.\\
+		Zeige: $ f(x_k)\xrightarrow{k\to\infty}f(x_0) $. Sei $ \e>0 $ beliebig. Es gibt $ \delta>0 $ mit $ f(x)\in B(f(x_0),\e) $, wenn $ x\in M\cap B(x_0,\delta) \exists k_0\in\N$ mit $ \norm{x_k-x_0}<\delta $ f\"ur alle $ k\geq k_0 $. Also $ f(x_k)\in B(f(x_0),\e)\forall k\geq k_0 $, also $ \norm{f(x_k)-f(x_0)}<\e\forall k\geq k_0 $.
+		\item['$ \Leftarrow $':] Sei $ f $ in $ x_0 $ unstetig. Dann gibt es ein $ \e>0 $, so dass $ f(M\cap B(x_0,\delta))\subset B(f(x_0),\e) $ f\"ur kein $ \delta>0 $. Also gilt $ \forall k\geq 1\exists x_k\in M\cap B\left(x_0\frac{1}{k}\right) $ mit $ \norm{f(x_k)-f(x_0)}\geq\e $. Aber $ \lim x_k=x_0 $, ohne dass $ (f(x_k))_k $ gegen $ f(x_0) $ konvergiert.
+	\end{description}
+\end{beweis}
+\begin{lemma}
+	Seien $ (Y,\norm{\cdot}_Y) $, $ (Z,\norm{\cdot}_Z) $ normierte Vektorr\"aume und $ f\colon M\rightarrow S $, $ g\colon S\rightarrow Z $ Abbildungen, $ M\subset V $, $ S\subset Y $. Wenn dann $ f$ in $ x_0\in M $ und $ g $ in $ y_0\coloneqq f(x_0) $ stetig ist, so ist $ g\circ f $ in $ x_0 $ stetig.
+\end{lemma}
+\begin{lemma}
+	Folgenkriterium anwenden.
+\end{lemma}
+\begin{lemma}
+	$ U\subset V $ sei offen und $ f\colon U\rightarrow Y $ ($ (Y,\norm{\cdot}_Y) $ normierter Vektorraum.). Dann ist $ f $ auf $ U $ stetig genau dann, w(enn $ f^{-1}(W) $ offen ist f\"ur jede offene Menge $ W\subset Y $.
+\end{lemma}
+\begin{beweis}
+	\begin{description}
+		\item['$ \Rightarrow $':] $ S\subset Y $ sei offen, $ x_0\in f^{-1}(W) $, $ y_0\coloneqq f(x_0) $. W\"ahle $ \e>0 $ mit $ B(y_0,\e)\subset W $, $ \exists\delta>0 $ mit $ f(B(x_0,\delta))\subset B(y_0,\e) $. Dann ist $ B(x_0,\delta)\subset f^{-1}(B(y_0,\e))\subset f^{-1(W)} $. Also ist $ f^{-1(W)} $ offen.
+		\item['$ \Leftarrow $':] Sei $ x_1\in U $, $ y_1\coloneqq f(x_1) $. Da $ B(y_1,\e)\subset Y $ offen, ist $ f^{-1}(B(y_1,\e)) $ es auch. Da $ x_1\in f^{-1}(B(y_0,\e)) $ $ \exists \delta>0 $ mit $ B(x_1,\delta)\subset f^{-1}(B(y_0,\e)) $.
+	\end{description}
+\end{beweis}
+\begin{lemma}
+	$ (Y,\norm{\cdot}_Y) $ sei normierter Vektorraum.
+	\begin{enumerate}
+		\item Genau dann ist eine lineare Abbildung $ f\colon V\rightarrow Y $ stetig, wenn eine Zahl $ c>0 $ mit \[ \norm{f(x)}_Y\leq c\norm{x}\forall x\in V \] existiert.
+		\item Jede lineare Abbildung $ f\colon \R^n\rightarrow \R^d $ ist stetig.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item Es gebe eine Konstante $ c>0 $ mit $ \norm{f(x)}_Y\leq c\norm{x} $ f\"ur alle $ x\in V $. Dann ist $ f $ in $ 0 $ stetig nach dem Folgenkriterium.\\
+		Sei $ x_0\in V $.
+		\[ \norm{f(x)-f(x_0)}_Y=\norm{f(x-x_0)}_Y\leq c\norm{x-x_0} \]
+		Also ist $ f $ stetig in $ x_0 $.\\
+		Angenommen, $ f $ sei stetig, aber $ \norm{f(x)}_Y\leq c\norm{x} $ gelte f\"ur kein $ c>0 $, dann w\"ahle $ x_k\in V $ mit $ \norm{f(x_k)}_Y\geq k\norm{x_k} $.
+		\[ v_k\coloneqq\frac{x_k}{k}\Rightarrow\norm{v_k}\leq\frac{1}{k}\text{ und }\norm{f(v_k)}=\frac{\norm{f(x_k)}}{k}\geq 1 \]
+		Dann w\"are $ f $ in $ 0 $ unstetig. $ \lightning $
+		\item Sei $ f(x)=Ax $ mit $ A\in\R^{d\times n} $.
+		\[ A=(a_{ij})_{\substack{i=1,...,d\\j=1,...,n}}\Rightarrow f(x)=\begin{pmatrix}
+		\langle A_1,x\rangle\\\vdots\\\langle A_d,x\rangle
+		\end{pmatrix}, A_i\coloneqq(a_{i1},...,a_{in}) \]
+		\[ |f(x)|^2=\sum_{i=1}^d \langle A_i,x\rangle^2\leq\left(\sum_{i=1}^{d}|A_i|^2\right)|x|^2 \]
+		$ c\coloneqq\sqrt{\sum_{i=1}^{d}|A_i|^2} $ erf\"ullt das Kriterium aus i).	 
+	\end{enumerate}
+\end{beweis}
+\begin{lemma}
+	Jede Norm $ \sN\colon V\rightarrow\R^+ $ auf einem Vektorraum $ V $ \"uber $ \R $ ist stetig, wenn $ \dim_\R V<\infty $.
+\end{lemma}
+\begin{beweis}
+	Sind $ x,y\in V $, so
+	\begin{align*} &\sN(x)=\sN(y+x-y)\leq \sN(y)+\sN(x-y)\\
+	\Rightarrow&\sN(x)-\sN(y)\leq\sN(x-y)\\
+	\Rightarrow&\sN(y)-\sN(x)\leq\sN(x-y)\\
+	\Rightarrow&|\sN(x)-\sN(y)|\leq\sN(x-y).
+	\end{align*}
+\end{beweis}
+\begin{lemma}
+	$ (V,\norm{\cdot}) $ und $ (Y,\norm{\cdot}_Y) $ seien normierte R\"aume. Sei $ U\subset V $ offen, $ K\subset U $ kompakt, ist dann $ f\colon U\rightarrow Y $ stetig, so ist auch $ f(K) $ kompakt.
+\end{lemma}
+\begin{beweis}
+	Sei $ (W_i)_{i\in I} $ eine \"Uberdeckung von $ f(K) $ durch offene Mengen. Dann folgt
+	\[ K\subset\bigcup_{i\in I}f^{-1}(W_i). \]
+	W\"ahle $ i_1,...,i_n\in I $ aus mit $ K\subset\bigcup_{k=1}^nf^{-1}W_{i_k} $. Hieraus folgt dann die Behauptung:
+	\[ f(K)\subset\bigcup_{k=1}^n W_{i_k}. \]
+\end{beweis}
+\begin{satz}
+	$ (V,\norm{\cdot}) $ wie zuvor, ist $ K\subset V $ kompakt, und $ f\colon U\rightarrow\R $ stetig, so gibt es $ x_+,x_-\in K $ mit $ f(x_-)\leq f\leq f(x_+) $.
+\end{satz}
+\begin{beweis}
+	$ f(K) $ ist kompakt, also abgeschlossen und beschr\"ankt. $ \inf_{x\in K} f(x)$ und $ \sup_{t\in K}f(t) $ sind definiert und es gibt Folgen $ (x_n')_n $, $ (x_n'')_n\subset K $ mit $ f(x_n')\rightarrow\inf_{x\in K}f(x) $, $ f(x_n'')\rightarrow\sup_{t\in K}f(t) $, wenn $ n\to\infty $. OEdA seien $ (x_n')_n $ und $ (x''_n)_n $ konvergent gegen $ x_-,x_+\in K $. Dann ist $ f(x_-)=\inf_{x\in K}f(x) $ und $ f(x_+)=\sup_{t\in K}f(t) $.
+\end{beweis}
+\begin{satz}
+	Ist $ V $ ein endlich erzeugter $ \R- $Vektorraum, so gibt es zu 2 Normen $ \sN_1 $, $ \sN_2\colon V\rightarrow[0,\infty[ $ eine Zahl $ c>0 $, so dass
+	\[ \frac{1}{c}\sN_1\leq\sN_2\leq c\sN_1. \]
+\end{satz}
+\begin{beweis}
+	Sei $ n=\dim V $ und $ \lbrace b_1,...,b_n\rbrace $ eine $ \R- $Basis f\"ur $ V $. Dann gibt es Linearformen $ b_1^\ast,....,b_n^\ast\colon V\rightarrow\R $ mit $ x=\sum_{l=1}^n b_l^\ast(x) b_l\forall x\in V $.\\
+	$ F(x)=(b_1^\ast(x),...,b_n^\ast(x)) $, $ F\colon V\rightarrow\R^n $ isomorph. $ \tilde{\sN}_j(y)\coloneqq\sN_j(F^{-1}(y)) $ sind Normen auf $ \R^n $.\\
+	Zeige: $ \exists c>0: $
+	\[ \frac{1}{c}\tilde\sN_1\leq\tilde{\sN}_2\leq x\tilde\sN_1. \]
+	F\"ur $ y\in\R^n $ ist
+	\[ \tilde\sN_1(y)=\tilde\sN_1\left(\sum_{j=1}^n y_j e_j\right)\leq\sum_{j=1}^n|y_j|\tilde\sN_1(e_j)\leq|y|\sqrt{\sum_{j=1}^{n}\tilde\sN_1(e_j)^2}=c_1'|y|. \]
+	$ \tilde\sN_1\colon\R^n\rightarrow[0,\infty[ $ ist stetig, $ K\coloneqq\lbrace y\in\R^n\mid |y|=1\rbrace $ ist abgeschlossen und beschr\"ankt, also kompakt. Dann existiert ein $ y_\ast\in K $ mit $ \tilde\sN_1(y)\geq\tilde\sN_1(y_\ast) $ ff\"ur alle $ y\in K $. F\"ur alle $ y\in\R^n $ gilt dann
+	\[ \tilde\sN_1(y)=\tilde\sN_1\left(|y|\frac{y}{|y|}\right)=|y|\tilde{\sN}_1\left(\frac{y}{|y|}\right)\geq\tilde{\sN}_1(y_\ast)|y|. \]
+	Hiermit folgt:
+	\[ \tilde{\sN}_1(y)\leq c_1'|y|\leq\frac{1}{\tilde{\sN}_1(y_\ast)}\tilde{\sN}_1(y). \]
+	Genauso ($ y_{\ast\ast}\in K $):
+	\[ \tilde{\sN}_2(y)\leq c'_2|y|\leq\frac{1}{\tilde{\sN}_2(y_{\ast\ast})}\tilde{\sN}_2(y). \]
+	Es folgt:
+	\[ \tilde{\sN}_1(y)\leq c_1'|y|\leq\frac{c_1'}{c_2'\tilde{\sN}(y_{\ast\ast})}\tilde{\sN}_2(y) \]
+	\[ \frac{c_2'}{c_1'}\tilde{\sN}_2(y_{\ast\ast})\tilde{\sN}_1\leq\tilde{\sN}_2 \]
+	\[ \tilde{\sN}_2(y)\leq c_2'|y|\leq\frac{c_2'}{c_1'\tilde{\sN}_1(y_\ast)}\tilde{\sN}_1(y) \]
+	\[ c\coloneqq\max\left\lbrace\frac{c_1'}{c_2'}\frac{1}{\tilde{\sN}_2(y_\ast)},\frac{c_2'}{c_1'}\frac{1}{\tilde{\sN}_1(y_\ast)}\right\rbrace \]
+	liefert das Verlangte.
+\end{beweis}
+\begin{lemma}
+	$ (V,\norm{\cdot}) $ sei normierter Vektorraum, ebenso $ (Y,\norm{\cdot}_Y) $. $ f\colon V\rightarrow Y $ sei auf einer kompakten Menge $ K\subset V $ stetig. Dann ist $ f $ auf $ K $ gleichm\"a\ss ig stetig, d.h. zu jedem $ \e>0 $ gibt es $ \delta>0 $, so dass $ \norm{f(x')-f(x'')}_Y\leq\e $, wenn immer $ x',x''\in K $ mit $ \norm{x'-x''}\leq\delta $ sind.
+\end{lemma}
+\begin{beweis}
+	Zu $ \e>0 $ und $ \tilde x\in K $ w\"ahle $ \delta_{\tilde x} >0$ mit $ f(B(\tilde x,\delta_{\tilde x}\subset B(f(x),\e/2) $. Dann \"uberdeckt $ (B(\tilde x,\delta_{\tilde x}/2))_{\tilde x\in K} $ $ K $. W\"ahle $ \tilde x_1,...,\tilde x_N\in K $ mit \[ K\subset\bigcup_{j=1}^NB(\tilde x_j,\delta_{\tilde x_j}/2),\quad \delta\coloneqq\frac{1}{2}\min\lbrace\delta_{\tilde x_j},...,\delta_{\tilde x_N}\rbrace. \]
+	Sind jetzt $ x',x''\in K $, $ \norm{x'-x''}<\delta $, f\"ur ein $ j\in\lbrace 1,...,N\rbrace $ ist dann $ x''\in B(\tilde x_j,\delta_{\tilde x_j}/2) $. Dann ist
+	\[ \norm{x'-\tilde x_j}\leq\norm{x'-x''}+\norm{x''-\tilde x_{j}}\leq\delta_{\tilde x_j}. \]
+	\[ \norm{f(x')-f(x'')}_Y\leq\norm{f(x')-f(\tilde x_j)}+\norm{f(\tilde x_j)-f(x'')}<\e \]
+\end{beweis}
+\begin{definition}
+	$ (V,\norm{\cdot}) $ sei normierter Raum, $ f\colon V\rightarrow V $ hei\ss t \deftxt{kontrahierend}, wenn $ \exists 0<x<1 $ mit $ \norm{f(x')-f(x'')}\leq c\norm{x'-x''} $ f\"ur $ x',x''\in V $.
+\end{definition}
+\begin{satz}[Banachscher Fixpunktsatz]
+	$ (V,\norm\cdot{}) $ sei vollst\"andiger normierter Vektorraum, $ f\colon V\rightarrow V $ sei kontrahierend. Dann hat $ f $ genau einen Fixpunkt $ x_0\in V $, also $ f(x_0)=x_0 $.
+\end{satz}
+\begin{beweis}
+	$ x_1\in V $ sei beliebig, induktiv definiere: $ x_{n+1}\coloneqq f(x_n) $. Dann ist \[ \norm{x_{n+1}-x_{n+1}}=\norm{f(x_{n+1}-f(x_n))}\leq c\norm{x_{n+1}-x_n}. \]
+	Somit: 
+	\[ \norm{x_{n+1}-x_n}\leq c^{n-1}\norm{x_2-x_1}. \]
+	F\"ur $ m>k $ gilt dann:
+	\[ \norm{x_m-x_k}=\norm{\sum_{l=k}^{m-1}(x_{l+1}-x_l)}\leq\sum_{l=k}^{m-1}\norm{x_{l+1}-x_l}\leq\left(\sum_{l=k}^{m-1}c^{l-1}\right)\norm{x_2-x_1}\leq\frac{c^{k-1}}{1-c}\norm{x_2-x_1}. \]
+	Also bildet $ (x_n)_n $ eine Cauchyfolge, es existiert $ x_0\colon\lim x_n $.\\
+	Da $ f $ stetig ist, gilt \[ f(x_0)=\lim_{n\to\infty} f(x_n)=\lim_{n\to\infty}x_{n+1}=x_0. \]
+	Ist $ y_0\in V $ und $ f(y_0)=y_0 $, so
+	\[ \norm{x_0-y_0}=\norm{f(x_0)-f(y_0)}\leq c\norm{x_0-y_0}\Rightarrow x_0-y_0=0. \]
+	Erg\"anzung:
+	\[ \norm{x_m-x_k}\leq\frac{c^{k-1}}{1-c}\norm{x_2-x_1}\Rightarrow \norm{x_k-x_0}\leq\frac{c^{k-1}}{1-c}\norm{x_2-x_1} \]
+\end{beweis}

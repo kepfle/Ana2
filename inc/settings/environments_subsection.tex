@@ -1,0 +1,113 @@
+
+\theoremstyle{thmstyle}
+\newtheorem{tmp_satz3}{Satz}[subsection]
+
+\newtheorem{tmp_kor3}	[tmp_satz3]{Korollar}
+\newtheorem{tmp_lemma3}[tmp_satz3]{Lemma}
+\newtheorem{tmp_prop3}	[tmp_satz3]{Proposition}
+\newtheorem{tmp_thm3}	[tmp_satz3]{Theorem}
+
+\theoremstyle{defstyle}
+\newtheorem{tmp_def3}[tmp_satz3]{Definition}	
+
+\theoremstyle{bspstyle}
+\newtheorem{tmp_bsp3}[tmp_satz3]{Beispiel}
+\newtheorem{tmp_bem3}[tmp_satz3]{Bemerkung}
+
+\newenvironment{satz3}[1][]{
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{thm_shade_color}
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_satz3}[#1]\refstepcounter{jacob}\customlabel{satz\arabic{chapter}.\arabic{jacob}}{Satz \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_satz3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+	
+\newenvironment{korollar3}[1][]{
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{thm_shade_color}
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_kor3}[#1]\refstepcounter{jacob}\customlabel{kor\arabic{chapter}.\arabic{jacob}}{Korollar \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_kor3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+	
+\newenvironment{lemma3}[1][]{
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{thm_shade_color}	
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_lemma3}[#1]\refstepcounter{jacob}\customlabel{lemma\arabic{chapter}.\arabic{jacob}}{Lemma \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_lemma3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+	
+\newenvironment{proposition3}[1][]{
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{thm_shade_color}
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_prop3}[#1]\refstepcounter{jacob}\customlabel{prop\arabic{chapter}.\arabic{jacob}}{Proposition \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_prop3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+	
+\newenvironment{theorem3}[1][]{
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{thm_color_2}
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_thm3}[#1]\refstepcounter{jacob}\customlabel{thm\arabic{chapter}.\arabic{jacob}}{Theorem \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_thm3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+
+\newenvironment{definition3}[1][]{	
+	\setlist			{rightmargin=\internalindent}
+	\setitemize		{leftmargin=\leftmargin}
+	\setenumerate	{leftmargin=\leftmargin+\internalindent}
+	\definecolor{shadecolor}{named}{def_shade_color}
+	\needspace{4\baselineskip}
+	\begin{shaded}\begin{tmp_def3}[#1]\refstepcounter{jacob}\customlabel{def\arabic{chapter}.\arabic{jacob}}{Definition \arabic{chapter}.\arabic{tmp_satz}}
+}{
+	\end{tmp_def3}
+	\end{shaded}
+	\noindent\ignorespacesafterend
+}
+
+\newenvironment{beispiel3}[1][]{	
+	\pushQED{\bspendmark}
+	\needspace{4\baselineskip}
+	\begin{tmp_bsp3}[#1]
+}{
+	\popQED
+	\end{tmp_bsp3}
+	\noindent\ignorespacesafterend
+}
+
+\newenvironment{bemerkung3}[1][]{	
+	\pushQED{}
+	\needspace{4\baselineskip}
+	\begin{tmp_bem3}[#1]
+}{
+	\end{tmp_bem3}
+	\noindent\ignorespacesafterend
+}
+
