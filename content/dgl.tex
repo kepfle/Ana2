@@ -1,0 +1,203 @@
+\chapter{Differentialgleichungen}
+\changesection
+\section{Definitionen und Beispiele}
+\section{Lineare Differentialgleichungen erster Ordnung}
+\begin{beispiel*}[Logistische Differentialgleichung]
+	\[ P'=\lambda KP-\lambda P^2 \]
+	$ u\coloneqq-\frac{1}{P} $ l\"ost $ u'=\frac{P'}{P^2}=-\lambda Ku-\lambda $.
+	\[ u(t)=u(0)e^{-\lambda Kt}-\frac{1}{k}\left(1-e^{-\lambda Kt}\right) \]
+	\[ P(t)=-\frac{1}{u(t)}=\frac{KP(0)}{(K-P(0))e^{-\lambda Kt}+P(0)}\leq K\text{ wenn }P(0)\leq K \]
+	F\"ur $ P(0)>K $, ist 
+	\[ P(t)=\frac{KP(0)}{Ke^{-\lambda Kt}+(1-e^{-\lambda Kt})P(0)}\leq P(0). \]
+\end{beispiel*}
+\section{L\"osungsmethoden f\"ur spezielle Differentialgleichungen erster Ordnung}
+\changesubsection
+\subsection{Bernoulli-Differentialgleichung}
+Seien $ a,b\in C^0(I) $, $ \rho\in\R\setminus\lbrace 0,1\rbrace $. Die DGL
+\[ (B)\qquad u'=au+bu^\rho \]
+hei\ss t \deftxt{Die Bernoulli-Differentialgleichung}.\\
+Im Allgemeinen ist $ (B) $ nur f\"ur positive Funktionen $ u $ erkl\"art.
+\begin{beispiel*}
+	Die Logistische DGL: $ \rho=2 $.
+\end{beispiel*}
+\begin{lemma}
+	\bullshit
+	\begin{enumerate}
+		\item Ist $ z\in C^1(I) $ positiv und l\"ost \[ (L)\qquad z'=(1-\rho)(az+b) \], so ist $ u=\frac{1}{z^{1-\rho}} $ L\"osung zu $ (B) $.
+		\item Ist $ u\in C^1(I) $ positiv und l\"ost $ (B) $, so ist $ z=u^{1-\rho} $ L\"osung zu $ (L) $.
+		\item Sind $ u_1,u_2 $ positive L\"osungen zu $ (B) $ und gibt es ein $ t_0\in I $ mit $ u_1(t_0)=u_2(t_0) $, so ist schon $ u_1=u_2 $.
+ 	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item Sei $ u=\frac{1}{z^{1-\rho}} $. Dann
+		\[ u'=\frac{1}{1-\rho}z^{\frac{1}{1-\rho}-1}z'=z^{\frac{\rho}{1-\rho}}(az+b)=az^{\frac{\rho}{1-\rho}+1}+bz^{\frac{1}{1-\rho}\rho}=au+bu^\rho. \]
+		\item 
+		\[ z'=(u^{1-\rho})'=(1-\rho)u^{-\rho}u'=(1-\rho)u^{-\rho}(au+bu^{\rho})=(1-\rho)(az+b) \]
+		\item $ z_k\coloneqq u_k^{1-\rho} $ l\"osen beide $ z_k'=(1-\rho)(az_k+b) $; $ w\coloneqq z_1-z_2 $ l\"ost $ w'=(1-\rho)aw $ und $ w(t_0)=0 $. Also $ w=0 $, $ z_1=z_2 $ und somit $ u_1=u_2 $.
+	\end{enumerate}
+\end{beweis}
+\begin{lemma}
+	Sei $ \rho\in\Z $, $ \rho\geq 2 $ und $ w $ eine beliebige L\"osung zu $ (B) $ (also nur $ w\in C^1(I) $), so gilt: Ist $ t_0\in I $, $ w(t_0)=0 $, so $ w=0 $.
+\end{lemma}
+\begin{beweis}
+	Sei $ \delta>0 $, $I_\delta\coloneqq [t_0-\delta,t_0+\delta]\subset I $; $ M_\delta\coloneqq\max_{I_\delta} |w| $, $ L_\delta\coloneqq\max_{I_\delta}|a|+M_\delta^{\rho-1}\max_{I_\delta}|b| $. Wir zeigen: $ \forall n\geq 0 $ ist \[ |w(t)|\leq\frac{M_\delta L_\delta^n}{n!}|t-t_0|^n,\quad t\in I_\delta. \]
+	\begin{description}
+		\item[Induktion nach $ n $:] $ n=0\surd $;\\
+		$ n-1\to n: $ \begin{align*}
+		w(t)&=\int_{t_0}^t w'(s)\dd s\\
+		&=\int_{t_0}^taw(s)-bw(s)^\rho\dd s\\
+		&=\int_{t_0}^t w(s)(a(s)+b(s)w(s)^{\rho-1})\dd s
+		\end{align*}
+		\[ |w(t)|\leq L_\delta\int_{t_0}^t |w(s)|\dd s\leq L_\delta\frac{M_\delta L_\delta^{n-1}}{(n-1)!}\int_{t_0}^t (s-t_0)^{n-1}\dd s=\frac{M_\delta L_\delta^n}{n!}(t-t_0)^n \]
+		f\"ur $ t\geq t_0 $. Analog f\"ur $ t\leq t_0 $.
+	\end{description}
+	Also $ w=0 $ auf $ I_\delta $. Genauso zeige: Ist $ t_\ast\in I $, $ w(t_\ast)=0 $, so $ \exists\delta_\ast>0 $: $ w=0 $ auf $ [t_\ast-\delta_\ast,t_\ast+\delta_\ast] $. Dann ist $ \lbrace t\in I\mid w(t)=0\rbrace $ offen und abgeschlossen und $ \neq\emptyset $, stimmt also mit $ I $ \"uberein.
+\end{beweis}
+\subsection{Die Riccati-Differentialgleichung}
+Sind $ a,b,f\in C^0(I) $, so hei\ss t die DGL
+\[ (R)\qquad u'=au+bu^2+f \]
+\deftxt{Riccatische Differentialgleichung}.
+\begin{lemma}
+	Sei $ u_p\in C^1(I) $ eine L\"osung zu $ (R) $.
+	\begin{enumerate}
+		\item Dann ist eine Funktion $ u\in C^1(I) $ L\"osung zuz $ (R) $, wenn $ w=u-u_p $ L\"osung zu
+		\[ (B^\ast)\qquad w'=(a+2bu_p)w+bw^2 \]
+		ist.
+		\item L\"osen $ u_1,u_2 $ die DGL $ (R) $ und $ u_1(t_0)=u_2(t_0) $ f\"ur ein $ t_0\in I $, so $ u_1=u_2 $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item
+	\[ w'=u'-u_p'=au+bu^2+f-au_p-bu_p-f=aw+bw(u+u_p)=aw+bw(w+2u_p)=(a+2bu_p)w+bw^2 \]
+	Umgekehrt sei $ w $ L\"osung zu $ (B^\ast) $; $ u\coloneqq w+u_p $. Dann
+	\[ u'=w'+u'_p=(a+2bu_p)w+bw^2+au_p+bu^2_p+f=au+b(w^2+2u_p w+u_p^2)+f=au+bu^2+f \]
+	\item $ w=u_1-u_2 $ l\"ost $ (B^\ast) $ mit $ w(t_0)=0\Rightarrow w\equiv 0 $.
+\end{enumerate}
+\end{beweis}
+\begin{beispiel*}[Grenzgeschwindigkeit eines Autos]
+	Die Geschwindigkeit $ v $ eines Autos erf\"ullt $ v'=f-\rho v^2 $ (mit $ f,\rho>0 $). Die DGL ist vom Typ $ (R) $ mit $ a=0 $, $ b=-\rho $. $ v_p\coloneqq\sqrt{\frac{f}{\rho}} $ l\"ost $ (R) $; l\"ose $ (R) $ unter $ v(0)=0 $.\\
+	L\"ose dazu \[ w'=-2\rho\sqrt{\frac{f}{\rho}}w-\rho w^2=-2\sqrt{\rho f}w-\rho w^2 \]
+	$ u\coloneqq\frac{1}{w} $ l\"ost $ u'=\frac{-w'}{w^2}=2\sqrt{\rho f}u+\rho $. Es folgt:
+	\begin{align*}
+	u(t)&=e^{2\sqrt{\rho f}t}\left(\int_0^t\rho e^{-2\sqrt{\rho f}s}\dd s+u(0)\right)\\
+	&=e^{2\sqrt{\rho f}t}\left(-\frac{\rho}{2\sqrt{\rho f}}\left(e^{-2\sqrt{\rho f}t}-1\right)+u(0)\right)\\
+	&=-\frac{1}{2}\sqrt{\frac{\rho}{f}}+\frac{1}{2}\sqrt{\frac{\rho}{f}}e^{2\sqrt{\rho f}t}+u(0)e^{2\sqrt{\rho f}t}
+	\end{align*}
+	\[ w(t)=\frac{1}{u(t)}=\frac{1}{-\frac{1}{2}\sqrt{\frac{\rho}{f}}e^{2\sqrt{\rho f}t}\left(u(0)+\frac{1}{2}\sqrt{\frac{\rho}{f}}\right)} \]
+	\[ v(t)=\sqrt{\frac{f}{\rho}}+w(t)=\sqrt{\frac{f}{\rho}}-\frac{1}{\frac{1}{2}\sqrt{\frac{\rho}{f}}\left(1-e^{-2\sqrt{\rho f}t}\right)+u(0)e^{2\sqrt{\rho f}t}}; \]
+	mit $ u(0)=\sqrt{\frac{f}{\rho}} $ wird $ v(0)=0 $.
+	\[ v(t)=\sqrt{\frac{f}{\rho}}\tanh(\sqrt{f\rho}t)\leq\sqrt{\frac{f}{\rho}}\qquad\tanh=\frac{e^x-e^{-x}}{e^x+e^{-x}} \]
+\end{beispiel*}
+\begin{beispiel*}
+	\[ y'=e^{-x}y^2+y-e^x \]
+	hat die Form $ (R) $ mit $ a=1 $, $ b=e^{-x} $ und $ f=-e^x $; $ y_p(x)\coloneqq e^x $. $ w=y-e^x $ l\"ost
+	\[ w'=(1+2e^{-x}e^x)w+e^{-x}w^2=3w+e^{-x}w^2. \]
+	$ v=\frac{1}{w} $ l\"ost $ v'=-3ve^{-x} $.
+	\[ v(x)=\left(v(0)-\frac{1}{2}\left(e^{2x}-1\right)\right)e^{-3x} \]
+	\[ w(x)=\frac{w(0)e^{3x}}{1-\frac{w(0)}{2}\left(e^{2x}-1\right)} \]
+	\[ y(x)=\frac{Ce^{3x}}{1-\frac{1}{2}\left(e^{2x}-1\right)C}-e^x,\quad C\neq 0 \]
+\end{beispiel*}
+\begin{lemma}
+	Angenommen, $ a,b\in C^1(I) $, $ b $ habe keine Nullstelle; \[ F\coloneqq bf+\frac{1}{2}\left(a+\frac{b'}{b}\right)'-\left(\frac{1}{2}\left(a+\frac{b'}{b}\right)\right)^2. \]
+	Dann gilt:
+	\begin{enumerate}
+		\item Ist $ z $ L\"osung zu \[ (R')\qquad z'=z^2+F \]
+		so ist \[ y\coloneqq\frac{1}{b}\left(z-\frac{1}{2}\left(a+\frac{b'}{b}\right)\right) \]
+		L\"osung zu $ (R) $.
+		\item L\"ost $ w $ die (lineare DGL) $ w''+Fw=0 $ und hat keine Nullstelle, so ist $ z\coloneqq -\frac{w'}{w} $ eine L\"osung zu $ (R') $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item Es gilt \begin{align*} z'-z^2-F&=b'y+by'+\frac{1}{2}\left(a+\frac{b'}{b}\right)'-b^2y^2-b\left(a+\frac{b'}{b}\right)y-\left(\frac{1}{2}\left(a+\frac{b}{b'}\right)\right)^2-bf-\frac{1}{2}\left(a+\frac{b'}{b}\right)'+\left(\frac{1}{2}\left(a+\frac{b'}{b}\right)\right)^2\\
+		&=b'y+by'-b^2y^2-aby-b'y-bf\\
+		&=b(y'-(ay+by^2+f)). \end{align*}
+		Also $ z $ l\"ost $ (R')\Leftrightarrow y $ l\"ost $ (R) $.
+		\item $ z=-\frac{w'}{w} $
+		\[ z'-z^2-F=-\frac{w''}{w}+\frac{w'^2}{w^2}-\left(\frac{w'}{w}\right)^2-F=-\frac{1}{w}(w''+Fw). \]
+		Hieraus folgt schon die Behauptung.
+	\end{enumerate}
+\end{beweis}
+\begin{beispiel*}
+	Was sind die L\"osungen zu \[ y'=-\left(2+\frac{1}{t}\right)y+\frac{1}{t}y^2+t+2? \]
+	Das ist $ (R) $ mit $ a=-2-\frac{1}{t} $, $ b=\frac{1}{t} $ und $ f=t+2 $ auf $ I\subset]0,\infty[ $. Berechne $ F: $
+	\begin{align*} F&=bf+\frac{1}{2}\left(a+\frac{b'}{b}\right)'-\frac{1}{4}\left(a+\frac{b'}{b}\right)^2\\
+	&=1+\frac{2}{t}+\frac{1}{t^2}-\left(1+\frac{1}{t}\right)^2\\
+	&=0
+	\end{align*}
+	Also lautet $ (R') $ $ z'=z^2 $, also $ -\frac{z'}{z^2}=-1 $, also $ \left(\frac{1}{z}\right)'=-1 $; w\"ahle $ z(t)=-\frac{1}{t} $, also L\"osung zu $ (R') $.
+	\[ y_p(t)\coloneqq\frac{1}{b}\left(z-\frac{1}{2}\left(a+\frac{b'}{b}\right)\right)=t\left(-\frac{1}{t}+1+\frac{1}{t}\right)=t \]
+	l\"ost $ (R) $.\\
+	Zu den weiteren L\"osungen: L\"ose
+	\begin{align*} (B)\qquad v'=(a+2by_p)v+bv^2 \end{align*}
+	d.h.
+	\[ v'=\left(-2-\frac{1}{t}+2\frac{1}{t}t\right)v+\frac{1}{t}v^2=-\frac{1}{t}(v-v^2) \]
+	also
+	\[ \frac{v'}{v^2-v}=-\frac{1}{t}, \]
+	nun ist
+	\[ \frac{1}{v^2-v}=-\left(\frac{1}{v}-\frac{1}{v-1}\right)\Rightarrow \frac{v'}{v^2-v}=\left(\log\frac{v-1}{v}\right)'\Rightarrow\log\frac{v-1}{v}=-\log t+C_1\Rightarrow\frac{v-1}{v}=\frac{C}{t}, C=e^{C_1}, v(t)=\frac{C}{C-t} \]
+	$ v $ ist auf $ ]0,C[ $ definiert, ebenso jede L\"osung $ y(t)=t+\frac{C}{C-t} $ zu $ (R) $.
+\end{beispiel*}
+\subsection{Differentialgleichungen mit trennbaren Variablen}
+Sei $ I\subset\R $ ein Intervall, $ h\colon\hat I\rightarrow]0,\infty[ $ stetig.
+\begin{satz}
+	Sei $ g\in C^0(I) $, $ I'\subset I $, $ a\in I' $. Ist dann $ u\in C^1(I') $ eine L\"osung zur DGL
+	\[ (S)\qquad y'=g\cdot h(y) \]
+	(also $ u'(t)=g(t)h(u(t))\forall t\in I' $), so gilt
+	\[ u=H_\ast^{-1}(H_\ast(u(a))+G) \]
+	wobei $ H_\ast $ Stammfunktion zu $ \frac{1}{h} $ und $ G $ Stammfunktion zu $ g $ mit $ G(a)=0 $ ist.
+\end{satz}
+\begin{beweis}
+	\[ \frac{u'}{h\circ u}=g=G'\Rightarrow (H_\ast\circ u)'=G' \]
+	\[ H_\ast(u(t))-H_\ast(u(a))=\int_a^t(H_\ast\circ u(s))'\dd s=G(t),\quad H_\ast(x)=\int_c^x\frac{\dd z}{h(z)}, \]
+	wenn $ \hat I=[c,d] $.
+	\[ H_\ast(u(t))=H_\ast(u(a))+G(t) \] nach $ u(t) $ aufl\"osen. Hieraus folgt dann die Behauptung.
+\end{beweis}
+\begin{beispiel*}
+	L\"osung zu \[ u'\sqrt{1-t^2}+\sqrt{1-u^2}=0,\quad u(0)=\frac{1}{2}. \]
+	\begin{align*} &u'=-\frac{\sqrt{1-u^2}}{\sqrt{1-t^2}}\\\Rightarrow& \frac{u'}{\sqrt{1-u^2}}=-\frac{1}{\sqrt{1-t^2}}\\\Rightarrow& (\arcsin u)'(t)=-(\arcsin t)'\\\Rightarrow&\arcsin u(t)-\arcsin\frac{1}{2}=-\arcsin t\\\Rightarrow&\arcsin u(t)=\frac{\pi}{6}-\arcsin t\\\Rightarrow& u(t)=-\sin\left(\arcsin t-\frac{\pi}{6}\right)=-t\cos\frac{\pi}{6}-\frac{1}{2}\cos(\arcsin t)=\frac{-\sqrt{3}}{2}t-\frac{1}{2}\sqrt{1-t^2} \end{align*}
+\end{beispiel*}
+\subsection{Differentialgleichungen vom Typ $ y'=f(at+by+c) $, $ a,b,c\in\R $, $ f\in C^0(\R) $}
+$ v(t)=by(t)+at+c $ muss $ v'(t)=by'+a=bf(v(t))+a $ ($ (S) $ mit $ g\equiv 1 $) l\"osen.
+\begin{beispiel*}
+	\[ y'=(2t+3y+1)^2,\quad f(z)=z^2, a=2, b=3, c=1. \]
+	$ v(t)=3y(t)+2t+1 $ l\"ost \begin{align*} &v'(t)=3v(t)^2+2=3\left(v^2+\frac{2}{3}\right)\\\Rightarrow&\frac{v'}{v^2+\frac{2}{3}}=3\\\Rightarrow&\frac{v'}{\left(\sqrt{\frac{3}{2}}v\right)^2+1}=2\\\Rightarrow&\frac{\sqrt{\frac{3}{2}}v'}{1+\left(\sqrt{\frac{3}{2}}v\right)^2}=\sqrt{6}\\\Rightarrow&\left(\arctan\left(\sqrt{\frac{e}{2}}v\right)\right)'=\sqrt{6}\\\Rightarrow&\arctan\left(\sqrt{\frac{3}{2}}v\right)=\sqrt{6}t+C,\quad C=\arctan\sqrt{\frac{3}{2}}v(0) \end{align*}
+	\[ v(t)=\sqrt{\frac{2}{3}}\tan(\sqrt{6}t+C), \]
+	wenn $ -\frac{\pi}{2}<\sqrt{6}t+C<\frac{\pi}{2} $.
+	\[ y(t)=\frac{1}{3}(v(t)-2t-1) \]
+	ist L\"osung.
+\end{beispiel*}
+\subsection{Differentialgleichungen vom Typ $ y'=f\left(\frac{y}{t}\right) $, $ f\in C^0(\R^+) $}
+$ u(t)\coloneqq\frac{y(t)}{t} $ muss \begin{align*} u'&=\frac{y'}{t}-\frac{y}{t^2}\\&=\frac{1}{t}\left(y'-\frac{y}{t}\right)\\&=\frac{1}{t}\left(f(u(t))-u(t)\right)\\&=g(t)h(u(t)),\quad g(t)=\frac{1}{t},h(\tilde x)=f(\tilde x)-\tilde x \end{align*}
+l\"osen.
+\begin{beispiel*}[Scheinwerfer]
+	\[ \left(y'+\frac{x}{y}\right)^2=1+\left(\frac{x}{y}\right)^2 \]
+	\[ y'=-\frac{x}{y}+\sqrt{1+\left(\frac{x}{y}\right)^2}=\frac{1}{\frac{x}{y}+\sqrt{1+\left(\frac{x}{y}\right)^2}}=f\left(\frac{y}{x}\right), \]
+	mit $ f(s)=\frac{s}{1+\sqrt{1+s^2}} $; $ u(x)=\frac{y(x)}{x} $ l\"ost $ \frac{u'}{f(u)-u}=\frac{1}{x} $; $ U(s)\coloneqq\log\frac{
+	s^2}{1+\sqrt{1+s^2}} $ l\"ost $ U'=\frac{1}{f(s)-s} $. Also
+	\begin{align*}
+	&(U\circ u)'=\frac{1}{x}=(\log x)'\\
+	\Rightarrow&U(u(x))=\log x+C_1\\
+	\Rightarrow&\frac{u(x)^2}{1+\sqrt{1+u(x)^2}}=Cx,\quad C=e^{C_1}\\
+	\Rightarrow&\frac{y(x)^2}{x^2+x\sqrt{x^2+y(x)^2}}=Cx\\
+	\Rightarrow&y(x)^2=2C_2x+C_2^2\quad(C_2>0\text{ passend})
+	\end{align*}
+\end{beispiel*}
+\subsection{Differentialgleichungen vom Typ $ y'=f\left(\frac{a_1t+b_1y+c_1}{a_2t+b_yt+c_2}\right) $, $ a_k,b_k,c_k\in\R $, $ k=1,2 $}
+\begin{description}
+	\item[1. Fall:] $ \left|\begin{smallmatrix}
+	a_1&b_1\\a_2&b_2
+	\end{smallmatrix}\right|\neq 0 $; w\"ahle $ \binom{\zeta}{\eta}\in\R^2 $ mit 
+	\[ \begin{pmatrix}
+	a_1&b_1\\a_2&b_2
+	\end{pmatrix} \begin{pmatrix}
+	\zeta\\\eta
+	\end{pmatrix}=-\begin{pmatrix}
+	c_1\\c_2
+	\end{pmatrix}. \]
+	Dann ist $ w(s)=y(s+\zeta)-\eta $ L\"osung zu 
+	\[ w'(s)=f\left(\frac{a_1s+a_1\zeta+b_1w+b_1\eta+c_1}{a_2s+a_2\zeta+b_2w+b_2\eta+c_2}\right)=f\left(\frac{a_1s+b_1w}{a_2s+b_2w}\right)=F\left(\frac{w(s)}{s}\right),\quad F(z)=f\left(\frac{a_1+b_1z}{a_2+b_2z}\right). \]
+	$ w $ l\"ost eine DGL vom Typ 3.3.5.
+\end{description}

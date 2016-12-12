@@ -1,1 +1,608 @@
-\chapter{Differentiation im $ \R^n $}
+\chapter{Differenziation in $ \R^n $}
+\section{Rechnen mit Ableitungen}
+\subsection{Partielle und totale Differenzierbarkeit}
+\changesubsection
+\begin{definition}
+	$ U\subset\R^n $ sei offen. $ f\colon U\rightarrow \R $ hei\ss t in $ x^0\in U $ \deftxt{partiell differenzierbar nach $ x_j $}, wenn der Grenzwert \[ f_{x_j}(x^0)=\frac{\partial f}{\partial x_j}(x^0)\coloneqq\lim_{t\to 0}\frac{f(x^0+te_j)-f(x^0)}{t} \]
+	existiert. Dabei ist $ e_j=(0,0,...,1_j,0,...,0) $.
+\end{definition}
+Zur Berechnung von $ f_{x_j}(x^0) $ setze in $ f(x) $ alle Variablen $ x_i $ auf $ x_i^0 $, wenn $ i\neq j $ und betrachte dann	\[ \frac{f(x_1^0,...,x_{j-1}^0, x_j,x_{j+1}^0,...,x_n^0)-f(x^0)}{x_j-x_j^0} \]
+und lasse darin $ x_j\to x_j^0 $ streben.
+\begin{beispiel*}
+	\begin{enumerate}
+		\item[]
+		\item 	\[ f(x_1,x_2)\coloneqq x_1^2\cos(2x_1x_2)\quad\text{auf}\quad\R^2,\quad x^0\coloneqq\left(\frac{\pi}{2},1\right) \]
+		\[ f(x_1,1)=x_1^2\cos(2x_1) \]
+		Bilde Ableitung nach $ x_1 $ in $ x_1=\frac{\pi}{2} $:
+		\begin{align*}
+		&f_{x_1}(x^0)=2x_1^0\cos(2x_1^0)-2(x_1^0)^2\sin(2x_1^0)=-\pi\\
+		&f\left(\frac{\pi}{2},x_2\right)=\frac{\pi^2}{4}\cos(\pi x_2)\\
+		&f_{x_2}(x^0)=-\frac{\pi^2}{4}\sin\pi=0
+		\end{align*}
+		\item Auf $ \R^n $ sei $ f(x)=|x_1| $. Ist $ x^0\in\R^n $, so gilt f\"ur $ x_1^0>0 $: $ f_{x_1}(x^0)=1 $ und f\"ur $ x_1^0<0 $: $ f_{x_1}(x^0)=-1 $. Ist $ x_1^0=0 $, so existiert $ f_{x_1}(x^0) $ nicht.\\
+		In jedem Falle ist $ f_{x_j}(x^0)=0 $, $ 2\leq j\leq n $.
+		\item \[ f(x_1,x_2,x_3)\coloneqq\frac{2x_1x_3}{1+x_1x_2+x_3^2}\quad\text{auf}\quad U\coloneqq\lbrace x\in\R^3\mid 1+x_1x_2+x_3^2\neq 0\rbrace,\quad x^0\coloneqq (1,2,-2) \]
+		\begin{align*}
+		&f(x_1,2,-2)=\frac{-4x^1}{2x_1+5}\\
+		&f_{x_1}(x_1,2,-2)=\frac{-4(2x_1+5)+8x_1}{(2x_1+5)^2}=\frac{-20}{(2x_1+5)^2}\\
+		&f_{x_1}(x^0)=-\frac{20}{49}\\
+		&f(1,x_2,-2)=\frac{-4}{x_2+5}\\
+		&f_{x_2}(x^0)=\frac{4}{(x_2^0+5)^2}=\frac{4}{49}\\
+		&f(1,2,x_3)=\frac{2x_3}{3+x_3^2}\\
+		&f_{x_3}(x^0)=\frac{2(3+(x_3^0)^2)-(2x_3^0)^2}{(3+(x_3^0)^2)^2}=\frac{6-2(x_3^0)^2}{(3+(x_3^0)^2)^2}=\frac{-2}{49}
+		\end{align*}
+	\end{enumerate}
+\end{beispiel*}
+\begin{lemma}
+	Sind $ f,g\colon U\rightarrow\R $ in $ x^0 $ partiell differenzierbar nach $ x_j $, so auch $ f+\alpha g $, $ fg $ und, sofern $ g(x^0)\neq 0 $, auch $ \frac{f}{g} $. Ferner gilt
+	\[ (f+\alpha g)_{x_j}(x^0)=f_{x_j}(X^0)+\alpha g_{x_j}(x^0) \]
+	\[ (fg)_{x_j}(x^0)=f(x^0)g_{x_j}(x^0)+f_{x_j}(x^0)g(x^0) \]
+	\[ \left(\frac{f}{g}\right)_{x_j}(x^0)=\frac{g(x^0)f_{x_j}(x^0)-g_{x_j}(x^0)f(x^0)}{g(x^0)^2} \]
+\end{lemma}
+\begin{beweis}
+	Wende Regeln aus Analysis 1 an auf
+	\[ f_j(t)\coloneqq f(x^0+te_j),\quad g_j(t)\coloneqq g(x^0+te_j)\quad\text{in}\quad t=0. \]
+	\vspace{-22pt}
+\end{beweis}
+\newpage
+\begin{definition}
+	Wir nennen eine Abbildung $ f\colon U\rightarrow\R^d $ ($ U\subset \R^n $ offen) in $ x^0 $ \deftxt{partiell nach $ x_j $ differenzierbar}, wenn $ f_1,...,f_d $ es sind, wobei $ f=(f_1,...,f_d) $.\\
+	ist $ f $ in $ x_0 $ partiell differenzierbar (d.h. partiell differenzierbar nach $ x_1,...,x_n $), so bezeichnen wir die Matrix
+	\[ J_f(x^0)=\left(\frac{\partial f_i}{\partial x_j}\right)_{\substack{i=1,..,d\\j=1,...,n}}\in\R^{d\times n} \]
+	mit \deftxt{Jacobimatrix von $ f $ bei $ x_0 $}.\\
+	F\"ur $ d=1 $ schreiben wir auch $ \nabla f(x^0) $ (\deftxt{Gradient}) statt $ J_f(x^0) $.
+\end{definition}
+\begin{beispiel*}
+	Sei
+	\[ f(x_1,x_2)\coloneqq \begin{cases}
+	0,&x=0\\\frac{x_1x_2}{|x|^2},&x\neq 0
+	\end{cases}\quad\text{in} \quad\R^2,\quad f(te_j)=0. \]
+	Hier folgt $ \nabla f(0)=0 $. $ f $ ist unstetig in $ 0 $, denn $ \left(\frac{1}{n},\frac{1}{n}\right)\xrightarrow{n\to\infty}0 $, aber $ f\left(\frac{1}{n},\frac{1}{n}\right)=\frac{1}{2}\not\rightarrow 0 $.
+\end{beispiel*}
+\begin{definition}[Differenzierbarkeit]
+	$ U\subset\R^n $ sei offen, $ x^0\in U $, dann nennen wir $ f\colon U\rightarrow\R $ in $ x^0 $ \deftxt{(total) differenzierbar}, wenn $ a\in\R^n $ existiert, so dass
+	\[ R_{f,x^0}(x)\coloneqq\frac{f(x)-f(x^0)-\langle a,x-x^0\rangle}{|x-x^0|}\xrightarrow{x\to x^0}0 \]
+\end{definition}
+\begin{lemma}
+	$ f\colon U\rightarrow\R $ ist in $ x^0 $ differenzierbar genau dann, wenn es stetige Funktionen $ \varphi_1,...,\varphi_n\colon U\rightarrow\R $ gibt mit
+	\begin{enumerate}
+		\item \[ f(x)=f(x^0)+\sum_{j=1}^n (x_j-x_j^0)\varphi_j(x) \]
+		\item $ \varphi_1,...,\varphi_n $ sind stetig in $ x^0 $.
+	\end{enumerate}
+	Dann ist $ f_{x_j}(x^0)=\varphi_j(x^0) $, also $ f $ in $ x^0 $ partiell differenzierbar.
+\end{lemma}
+\vspace{-22pt}
+\begin{beweis}
+	\begin{description}
+		\item['$ \Rightarrow $':] W\"ahle $ a=(a_1,...,a_n)\in\R^n $ mit $ \frac{f(x)-f(x^0)-\langle a,x-x^0\rangle}{|x-x^0|}\xrightarrow{x\to x^0} 0 $.
+		\[ \varphi_j(x)\coloneqq \begin{cases}
+		a_j,&x=x^0\\a_j+\frac{x_j-x_j^0}{|x-x^0|}R_{f,x^0}(x),& x\neq x^0
+		\end{cases} \]
+		$ \varphi_j(x)\xrightarrow{x\to x^0}a_j $. Also sind alle $ \varphi_j $ in $ x^0 $ stetig. Hieraus folgt ii).\\
+		i) folgt aus:
+		\begin{align*} f(x)&=f(x^0)+|x-x^0|R_{f,x^0}(x)+\sum_{j=1}^{n}a_j(x_j-x_j^0)\\&=f(x^0)+\sum_{j=1}^{n}(x_j-x_j^0)\left(a_j+\frac{x_j-x_j^0}{|x-x^0|}R_{f,x^0}(x)\right)\\
+		&=f(x^0)+\sum_{j=1}^{n}(x_j-x_j^0)\varphi_j(x)
+		\end{align*}
+		\item['$ \Leftarrow $':] 
+		\begin{align*} f(x)-f(x^0)&=\sum_{j=1}^{n}(x_j-x_j^0)\varphi_j(x)\\
+		&=\sum_{j=1}^{n}(x_j-x_j^0)\varphi_j(x^0)+\sum_{j=1}^{n}(x_j-x_j^0)(\varphi_j(x)-\varphi_j(x^0))
+		\end{align*}
+		Sei nun $ a\coloneqq(\varphi_1(x^0),...,\varphi_n(x^0)) $. Dann folgt:
+		\[ R_{f,x^0}(x)=\sum_{j=1}^{n}\frac{x_j-x_j^0}{|x-x^0|}(\varphi_j(x)-\varphi_j(x^0)) \]
+		\[ |R_{f,x^0}(x)|\leq\sum_{j=1}^{n}|\varphi_j(x)-\varphi_j(x0)|\xrightarrow{x\to x^0} 0\quad\text{wegen ii)} \]
+	\end{description}
+\end{beweis}
+\begin{korollar}
+	Ist $ f\colon U\rightarrow\R $ in $ x^0 $ differenzierbar, so ist $ f $ stetig in $ x^0 $. 
+\end{korollar}
+\begin{definition}
+	Eine Abbildung $ f\colon U\rightarrow\R^d $ hei\ss t differenzierbar in $ x^0\in U $, wenn eine Matrix $ A\in\R^{d\times n} $ mit $ \frac{f(x)-f(x^0)-A(x-x^0)}{|x-x^0|}\xrightarrow{x\to x^0}0 $ gefunden werden kann.\\
+	(\"Aquivalent: Ist $ f=(f_1,...,f_d) $, so sind alle $ f_j $ in $ x^0 $ differenzierbar.)
+\end{definition}
+\begin{lemma}
+	$ f\colon U\rightarrow\R^d $ ist in $ x^0\in U $ differenzierbar genau dann, wenn $ \Phi_1,...,\Phi_n\colon U\rightarrow\R^d $, stetig in $ x^0 $, existieren, so dass
+	\[ f(x)=f(x^0)+\sum_{j=1}^{n}(x_j-x_j^0)\Phi_j(x). \]
+\end{lemma}
+\begin{lemma}
+	Ist $ f\colon U\rightarrow\R $ differenzierbar in $ x^0 $, so ist sie auch partiell differenzierbar, und
+	\[ \frac{f(x)-f(x^0)-\langle\nabla f(x^0),x-x^0\rangle}{|x-x^0|}\xrightarrow{x\to x^0}0. \]
+\end{lemma}
+\begin{beweis}
+	Sei $ a=(a_1,...,a_n) $ mit $ \frac{f(x)-f(x^0)- \langle a,x-x^0\rangle}{|x-x^0|}\rightarrow 0 $ mit $ x\to x^0 $.
+	\begin{align*}
+	\frac{f(x^0+te_j)-f)x^0}{t}&=\langle a,e_j\rangle+\frac{|t|}{t}R_{f,x^0}(x^0+te_j)\xrightarrow{t\to 0}a_j
+	\end{align*}
+	Also $ f_{x_j}(x^0)=a_j $, $ 1\leq j\leq n $.\\
+	Mitbewiesen: Ist $ \frac{f(x)-f(x^0)-\langle a,x-x^0\rangle}{|x-x^0|}\xrightarrow{x\to x^0}0 $, so ist schon $ a=\nabla f(x^0) $.\\
+	Analog gilt f\"ur Abbildungen: Ist $ f\colon U\rightarrow\R^d $ in $ x^0\in U $ differenzierbar und $ A\in\R^{d\times n} $ mit $ \frac{f(x)-f(x^0)-A(x-x^0)}{|x-x^0|}\xrightarrow{x\to x^0}0 $, so ist schon $ A=J_f(x^0) $.
+\end{beweis}
+\begin{lemma}
+	$ f,g\colon U\Rightarrow\R^d $ seien differenzierbar in $ x^0\in U $. Dann ist $ f+\alpha g$ es auch ($ \alpha\in\R $).\\
+	F\"ur $ d=1 $ ist auch $ fg $ differenzierbar in $ x^0 $.\\
+	Weiter: $ f\colon U\rightarrow\R^d $, $ g\colon U\rightarrow\R $ differenzierbar in $ x^0 $, so auch $ fg $.
+\end{lemma}
+\vspace{-22pt}
+\begin{beweis}
+	\begin{description}
+		\item[1. Behauptung:] Klar nach Lemma 2.1.1.2.
+		\item[2. Behauptung:] Schreibe
+		\[ f(x)=f(x^0)+\sum_{j=1}^{n}(x_j-x_j^0)\varphi_j(x)\quad\text{und}\quad g(x)=g(x^0)+\sum_{k=1}^{n}(x_k-x_k^0)\psi_k(x). \]
+		Dabei sind $ \varphi_j, \psi_k $ stetig in $ x^0 $. Dann gilt:
+		\[ f(x)+\alpha g(x)=f(x^0)+\alpha g(x^0)+\sum_{l=1}^n (x_l-x_l^0)(\varphi_l(x)+\alpha \psi_l(x)) \]
+		\begin{align*} (fg)(x)=&f(x^0)g(x^0)+f(x^0)\sum_{k=1}^n(x_k-x_k^0)\psi_k(x)+g(x^0)\sum_{j=1}^{n}(x_j-x_j^0)\varphi_j(x)\\&+\sum_{j,k=1}^n(x_j-x_j^0)(x_k-x_k^0)\varphi_j(x)\psi_k(x)\\
+		=&f(x^0)g(x^0)+\sum_{p=1}^n(x_p-x_p^0)(f(x^0)\psi_p(x)+g(x^0)\varphi_p(x))\\
+		&+\sum_{p=1}^{n}(x_p-x_p^0)\left(\varphi_p(x)\sum_{k=1}^{n}(x_k-x_k^0)\psi_k(x)\right)\\
+		=&f(x^0)g(x^0)+\sum_{p=1}^{n}(x_p-x_p^0)\left(f(x^0)\psi_p(x)+g(x^0)\varphi_p(x)+\sum_{k=1}^{n}\varphi_p(x)(x_k-x_k^0)\psi_k(x)\right)\\
+		=&f(x^0)g(x^0)+\sum_{p=1}^{n}(x_p-x_p^0)\Phi_p(x) \end{align*}
+		\begin{align*}
+		\frac{1}{g(x)}&=\frac{1}{g(x^0)}+\frac{1}{g(x)}-\frac{1}{g(x^0)}=\frac{1}{g(x^0)}-\frac{g(x)-g(x^0)}{g(x)g(x^0)}=\frac{1}{g(x^0)}-\sum_{k=1}^{n}(x_k-x_k^0)\frac{\psi_k(x)}{g(x)g(x^0)}
+		\end{align*}
+		Somit ist $ \frac{1}{g} $ differenzierbar in $ x^0 $, also auch $ \frac{f}{g}=f\cdot\frac{1}{g} $. 
+	\end{description}
+\end{beweis}
+\begin{satz}[Kettenregel]
+	Seien $ U\subset\R^n $, $ V\subset\R^d $ offen und $ f\colon U\rightarrow V $, $ g\colon V\rightarrow\R^k $, $ x^0\in U $, $ y^0=f(x^0) $. Ist $ f $ in $ x^0 $ und $ g $ in $ y^0 $ differenzierbar, so ist $ g\circ f $ in $ x^0 $ differenzierbar und $ J_{g\circ f}(x^0)=J_g(y^0)\cdot J_f(x^0) $.
+\end{satz}
+\newpage
+\begin{beweis}
+	\[ g(y)=g(x^0)+J_g(y^0)(y-y^0)+|y-y^0|R_{g,y^0}(y)\quad\text{mit}\quad R_{g,y^0}(y)\xrightarrow{y\to y^0}0 \]
+	\[ f(x)=f(x^0)+J_f(x^0)(x-x^0)+|x-x^0|R_{f,x^0}(x)\quad\text{mit}\quad R_{f,x^0}(x)\xrightarrow{x\to x^0}0 \]
+	W\"ahle $ y=f(x) $:
+	\begin{align*}
+	g\circ f(x)&=g\circ f(x^0)+J_g(y^0)(f(x)-f(x^0))+|f(x)-f(x^0)|R_{g,y^0}(f(x))\\
+	&=g\circ f(x^0)+J_g(x^0)(J_f(x^0)(x-x^0))+J_g(y^0)|x-x^0|R_{f,x^0}(x)+|f(x)-f(x^0)|R_{g,y^0}(f(x))\end{align*}
+	Nun ist aber \begin{align*}
+	&J_g(y^0)|x-X^0|R_{f,x^0}(x)+|f(x)-f(x^0)|R_{g,y^0}(f(x))\\
+	=&|x-x^0|\left(J_g(y^0)R_{f,x^0}(x)+\left|J_f(x^0)\cdot\frac{x-x^0}{|x-x^0|}+R_{f,x^0}(x)\right|R_{g,y^0}(f(x))\right)\\
+	=&|x-x^0|\tilde R(x)
+	\end{align*}
+	Also:
+	\[ g\circ f(x)=g\circ f(x^0)+J_g(y^0)J_f(x^0)(x-x^0)+|x-x^0|\tilde R(x)\quad\text{mit}\quad\tilde R(x)\xrightarrow{x\to x^0}0 \]
+	Hieraus folgt die Behauptung.
+\end{beweis}
+\begin{beispiel*}
+	\[ f(x_1,x_2)=(e^{-2x_1})(x_1^2+x_2),e^{-x_2}x_1,\quad g(y_1,y_2)=(y_1^2,2y_1y_2-y_2^2,y_1^2y_2),\quad x^0=(1,2) \]
+	Was ist $ J_{g\circ f}(x^0) $?
+	\begin{align*} &y^0=f(x^0)=(3e^{-2},e^{-2})\\
+	&J_f(x)=\begin{pmatrix}
+	\frac{\partial f_1}{x_1}&\frac{\partial f_1}{x_2}\\\frac{\partial f_2}{x_1}&\frac{\partial f_2}{x_2}
+	\end{pmatrix}(x)=\begin{pmatrix}
+	-2e^{-2x_1}(x_1^2)+2x_1e^{-2x_1}&e^{-2x_1}\\
+	e^{-x_2}&-e^{-x_2}x_1
+	\end{pmatrix}\\
+	&J_f(1,2)=\begin{pmatrix}
+	-4e^{-2}&e^{-2}\\e^{-2}&e^{-2}
+	\end{pmatrix}=e^{-2}\begin{pmatrix}
+	-4&1\\1&-1
+	\end{pmatrix}\\
+	&J_g(y)=\begin{pmatrix}
+	2y_1&0\\2y_2&2y_1-2y_2\\2y_1y_2&y_1^2
+	\end{pmatrix}\\
+	&J_g(y^0)=\begin{pmatrix}
+	6e^{-2}&0\\2e^{-2}&4e^{-2}\\6e^{-4}9e^{-4}
+	\end{pmatrix}=e^{-2}\begin{pmatrix}
+	6&0\\2&4\\6e^{-2}&9e^{-2}
+	\end{pmatrix}\\
+	&J_{g\circ f}(1,2)=e^{-4}\begin{pmatrix}
+	6&0\\2&4\\6e^{-2}&9e^{-2}
+	\end{pmatrix}\begin{pmatrix}
+	-4&1\\1&-1
+	\end{pmatrix}=e^{-4}\begin{pmatrix}
+	-24&6\\-4&-2\\-15e^{-2}&.3e^{-2}
+	\end{pmatrix} \end{align*}
+\end{beispiel*}
+\newpage
+\begin{definition}
+	$ f\colon U\rightarrow\R $ sei eine Funktion, $ x^0\in U $, $ v\in\R^n $, $ |v|=1 $. Wenn dann $ \lim_{t\to 0}\frac{f(x^0+tv)-f(x^0)}{t}\eqqcolon\partial_v f(x^0) $ existiert, sagen wir, $ f $ sei in $ x^0 $ in Richtung $ v $ differenzierbar. $ \partial_v f(x^0) $ hei\ss t \deftxt{Richtungsableitung von $ f $ in $ x^0 $ in Richtung $ v $}. 
+\end{definition}
+\begin{beispiel*}
+	\begin{enumerate}
+		\item []
+		\item 	\[ f(x_1,x_2)=\begin{cases}
+		\frac{x_1x_2}{|x|^2},&x\neq 0\\
+		0,&x=0
+		\end{cases},\quad \frac{f(tv)}{t}=\frac{t^2v_1v_2}{t^3|v|^2}=\frac{v_1v_2}{t} \]
+		wenn $ |v|=1 $. $ \partial_v f(0) $ existiert nicht, au\ss er f\"ur $ v_1v_2=0 $.
+		\item \[ f(x_1,x_2)=\begin{cases}
+		\frac{x_1^2x_2}{|x|^2},&x\neq 0\\0,&x=0
+		\end{cases},\quad \frac{f(tv)}{t}=\frac{t^3v_1^2v_2}{t^3|v|^2}=v_1^2v_2 \]
+		wenn $ |v|=1 $. Also ist $ \partial_v f(0)=v_1^2v_2 $.
+		\[ R_{f,0}(x)=\frac{f(x)}{|x|}=\frac{x_1^2x_2}{|x|^3}=
+		\frac{x_1^3}{(2x_1^2)^{3/2}}=\frac{1}{2^{3/2}\left(\frac{x_1}{|x_1|}\right)^3}=\begin{cases}
+		\frac{1}{2^{3/2}},&x_1>0\\-\frac{1}{2^{3/2}},&x_1<0
+		\end{cases} \]
+		$ f $ ist nicht differenzierbar in $ 0 $.
+	\end{enumerate}
+\end{beispiel*}
+\begin{lemma}
+	$ U\subset\R^n $ sei offen, $ x^0\in U $, $ f\colon U\rightarrow\R $ in $ x^0 $ differenzierbar. Dann existiert $ \partial_v f(x^0) $ f\"ur alle $ v\in S\coloneqq\lbrace v\mid |v|=1\rbrace $ und \[ \partial_v f(x^0)=\langle\nabla f(x^0),v\rangle \].
+\end{lemma}
+\begin{beweis}
+	$ \alpha'(t)\coloneqq x^0+tv\colon]-\delta,\delta[\rightarrow U $ ist differenzierbar in $ 0 $ ($ 0<\delta $ klein) , $ f\circ\alpha $ ist differenzierbar und
+	\[ \partial_v f(x^0)=(f\circ\alpha)'(0)=J_f(\alpha(0))\alpha'(0)=\nabla f(x^0)\begin{pmatrix}
+	\alpha_1(0)\\\vdots\\\alpha'_n(0)
+	\end{pmatrix}=\langle\nabla f(x^0),v\rangle. \]
+\end{beweis}
+\newpage
+\begin{lemma}[Mittelwertsatz]
+	Sei $ f\colon B(x^0,R)\rightarrow\R $ differenzierbar, dann gibt es f\"ur $ A,B\in B(x^0,R) $ ein $ \xi\in\lbrace tB+(1-t)A\mid 0\leq t\leq 1\rbrace $ mit \[ f(B)-f(A)=\langle\nabla f(\xi),B-A\rangle. \]
+\end{lemma}
+\begin{beweis}
+	$ \alpha(t)=tB+(1-t)A $, $ 0\leq t\leq 1 $, $ g\coloneqq f\circ\alpha $, $ f(B)=g(1) $, $ f(A)=g(0) $. Es existiert also \[ t_\ast\in]0,1[ \text{ mit } f(B)=f(A)=g(1)-g(0)=g'(t_\ast)=\langle\nabla f(g(t_\ast)),B-A\rangle, \]
+	da $ g'(t)=B-A $, $ \xi\coloneqq g(t_\ast)=(1-t_\ast)A+t_\ast B $.
+\end{beweis}
+\begin{lemma}
+	$ U\subset\R^n $ sei offen, $ f\colon U\rightarrow\R $ sei partiell differenzierbar. Gibt es $ M>0 $, so dass $ |f_{x_j}|\leq M $, $ 1\leq j\leq n $, so ist $ f $ stetig auf $ U $.
+\end{lemma}
+\begin{beweis}
+	$ x^0\in U $ und $ r>0 $, so dass \[ Q(x^0,r)\coloneqq\lbrace x\in\R^n\mid |x_j-x^0_j|<r,1\leq j\leq n\rbrace\subset U. \]
+	F\"ur $ x\in Q(x^0,r) $ gilt \begin{align*} f(x)-f(x^0)=&f(x)-f(x_1^0,x_2,...,x_n)+f(x_1^0,x_2,...,x_n)-f(x_1^0,x_2^0,...,x_n^0)\\
+	=&f(x_1,xx_2,...,x_n)-f(x_1^0,x_2^0,...,x_n^0)+f(x_1^0,x_2,...,x_n)\\&-f(x_1^0,x_2^0,x_3,...,x_n)+f(x_1^0,x_2^0,x_3,...,x_n)-f(x_1^0,x_2^0,...,x_n^0)\\
+	=&\sum_{k=1}^{n}f(x_1^0,...,x_{k-1}^0,x_k,x_{k+1})-f(x_1^0,...,x_{k}^0,x_{k+1},...,x_n)\qquad(1) 
+	\end{align*}
+	Die Funktion $ g_k(t)\coloneqq f(x_1^0,...,x_{k-1}^0,t,x_{k+1},...,x_n)-f(x_1^0,...,x_k^0,x_{k+1},...,x_n) $ ist differenzierbar und weiter \[ f(x)-f(x^0)=\sum_{k=1}^{n}g_k(x_k)=\sum_{k=1}^{n}(g_k(x_k)-g_k(x_k^0)). \]
+	Der Mittelwertsatz f\"ur $ g_k $ liefert ein $ z_k $ zwischen $ x_k $ und $ x_k^0 $ mit\begin{align*} g_k(x_k)-g_k(x_k^0)&=g'_k(z_k)(x_k-x_k^0)=f_{x_k}(x_1^0,...,x_{k-1}^0,z_k,x_{k+1},...,x_n)(x_k-x_k^0)
+	\end{align*}
+	Es folgt:
+	\begin{align*}
+	|g_k(x_k)-g_k(x_k^0)|\leq M|x_k-x_k^0|\xRightarrow[]{(1)}|f(x)-f(x^0)|\leq M\sum_{k=1}^{n}|x_k-x_k^0|\leq\sqrt n M|x-x^0|
+	\end{align*}
+	Die Behauptung folgt.
+\end{beweis}
+\begin{lemma}
+	$ U\subset\R^n $ offen, $ f\colon U\rightarrow\R $ sei partiell differenzierbar und $ x^0\in U $. Sind alle $ f_{x_j} $ stetig in $ x^0 $, so ist $ f $ in $ x^0 $ differenzierbar.
+\end{lemma}
+\begin{beweis}
+	Zeige:
+	\[ \frac{f(x)-f(x^0)-\langle\nabla f(x^0),x-x^0\rangle}{|x-x^0|}\xrightarrow{x\to x^0}0 \]
+	Dazu sei $ r>0 $ klein, so dass $ B(x^0,r\sqrt{n})\subset U $. Dann gilt:
+	\begin{align*} f(x)-f(x^0)&=\sum_{k=1}^{n}f_{x_k}(x_1^0,...,x_{k-1}^0,z_k,x_{k+1},...,x_n)(x_k-x_k^0)\quad (z_k\text{ wie oben})\\
+	&=\sum_{k=1}^{n}f_{x_k}(x^0)(x_k-x_k^0)+\sum_{k=1}^{n}(f_{x_k}(x_1^0,...,x_{k-1}^0,z_k,x_{k+1},...,x_n)-f_{x_k}(x^0))(x_k-x_k^0) \end{align*}
+	Also:
+	\[ \frac{f(x)-f(x^0)-\langle\nabla f(x^0),x-x^0\rangle}{|x-x^0}=\sum_{k=1}^{n}(f_{x_k}(x_1^0,...,x_{k-1}^0,z_k,x_{k+1},...,x_n)-f_{x_k}(x^0))\frac{x_k-x_k^0}{|x-x^0|} \]
+	Aber mit $ x\to x^0 $ strebt auch $ (x_1^0,...,x_{k-1}^0,z_k,x_{k+1},...,x_n)\to x^0 $. Da $ f_{x_k} $ in $ x^0 $ stetig ist geht auch die rechte Seite der obigen Gleichung gegen $ 0 $, wenn $ x\to x^0 $.
+\end{beweis}
+\subsection{H\"ohere Ableitungen}
+\begin{definition}
+	Sei $ V $ ein endlich erzeugter $ \R- $Vektorraum mit einer Norm $ \sN $. Ist $ U\subset\R^n $ offen, $ x^0\in U $, so hei\ss t eine Abbildung $ F\colon U\rightarrow V $ in $ x^0 $ differenzierbar, wenn eine lineare Abbildung $ DF(x^0)\colon \R^n\rightarrow V $ existiert mit
+	\[ \sN\left(\frac{F(x)-F(x^0)-DF(x^0)(x-x^0)}{|x-x^0|}\right)\xrightarrow{x\to x^0}0. \]
+\end{definition}
+\begin{beispiel*}
+	\begin{enumerate}
+		\item[]
+		\item Jede lineare Abbildung $ f\colon\R^n\rightarrow V $ ist in jedem $ x^0\in\R^n $ differenzierbar, $ Df(x^0)=f $.
+		\item Ist $ f\colon U\rightarrow\R^d $ in $ x^0 $ differenzierbar, so ist $ Df(x^0)\colon\R^n\rightarrow\R^d $, $ Df(x^0)(v)\coloneqq J_f(x^0)v $. Also $ Df(x^0)\in\hom(\R^n,\R^d) $.\\
+		Ist $ \lambda(v)=A\cdot v $ mit $ A\in\R^{d\times n} $, so ist \[ \sN(\lambda)=\sqrt{\sum_{j=1}^n\sum_{i=1}^d a_{ij}^2} \]
+		wenn $ A=(a_{ij})_{i=1,j=1}^{d,n} $.
+	\end{enumerate}
+\end{beispiel*}
+\begin{definition}
+	$ U\subset\R^n $ sei offen, $ f\colon U\rightarrow\R^d $ hei\ss t stetig differenzierbar in $ x^0\in U $, wenn $ f $ \"uberall differenzierbar ist und $ x\mapsto Df(x) $ stetig in $ x^0 $ ist.
+\end{definition}
+\begin{bemerkung*}
+	Eine differenzierbare Abbildung $ f\colon U\rightarrow\R^d $ ist in $ x^0\in U $ stetig differenzierbar, wenn $ \frac{\partial f_i}{x_j} $ in $ x^0 $ stetig, f\"ur alle $ 1\leq i\leq d $, $ 1\leq j\leq n $.
+\end{bemerkung*}
+\begin{definition}
+	$ U\subset\R^n $ sei offen, $ x^0\in U $, $ f\colon U\rightarrow\R^d $ hei\ss t in $ x^0 $ \deftxt{2-mal differenzierbar}, wenn $ f $ differenzierbar ist und $ Df $ in $ x^0 $ differenzierbar ist.
+\end{definition}
+\begin{bemerkung*}
+	Ist $ f\colon U\rightarrow\R^d $ differenzierbar, so ist $ f $ in $ x^0 $ 2-mal differenzierbar, wenn alle $ \frac{\partial f_i}{\partial x_j} $ in $ x^0 $ differenzierbar sind.
+\end{bemerkung*}
+\newpage
+\begin{definition}
+	$ f\colon U\rightarrow\R $ sei differenzierbar, ist dann jede partielle Ableitung $ f_{x_j} $ in $ x^0\in U $ partiell differenzierbar, so schreiben wir
+	\[ \frac{\partial^2 f}{\partial x_i\partial x_j}(x^0)=\frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_j}\right)(x^0). \]
+\end{definition}
+\begin{beispiel*}
+	\[ f(x_1,x_2)=x_1e^{-2x_1x_2+x_2^2} \]
+	\begin{align*}
+	&\frac{\partial f}{\partial x_2}=x_1(-2x_1+2x_2)e^{-2x_1x_2+x_2^2}\\
+	&\frac{\partial^2 f}{\partial x_1\partial x_2}=((-4x_1+2x_2)+(-2x_1^2+2x_1x_2)(-2x_2))e^{-2x_1x_2+x_2^2}\\
+	&\frac{\partial f}{\partial x_1}=(1+2x_1x_2)e^{-2x_1x_2+x_2^2}\\
+	&\frac{\partial^2 f}{\partial x_2\partial x_1}=(-2x_1+(1-2x_1x_2)(-2x_1+2x_2))e^{-2x_1x_2+x_2^2}
+	\end{align*}
+	Nachrechnen liefert:
+	\[ \frac{\partial^2 f}{\partial x_1\partial x_2}=\frac{\partial^2 f}{\partial x_2\partial x_1}=(-4x_1+2x_2+4x_1^2x_2-4x_1x_2^2)e^{-2x_1x_2+x_2^2} \]
+	Gilt dies immer, wenn nur beide 2. partiellen Ableitungen existieren?
+	\begin{beispiel*}
+		\[ f(x)\coloneqq \begin{cases}
+		\frac{x_1x_2^3}{|x|^2},&x\neq 0\\0,&x=0
+		\end{cases},\quad |f(x)|\leq|x|^2, \]
+		$ f $ ist stetig in $ 0 $, $ f(te_1)=f(te_2)=0 $, $ \frac{\partial f}{\partial x_k}(0)=0 $, $ 1\leq k\leq 2 $.
+		\begin{align*}
+		&\frac{\partial f}{\partial x_1}(x)=\frac{|x|^2x_2^3-x_1x_2^32x_1}{|x|^4}\Rightarrow\left|\frac{\partial f}{\partial x_1}(x)\right|\leq 3|x|\xrightarrow{x\to 0}0\\
+		&\frac{\partial f}{\partial x_2}(x)=\frac{|x|^23x_1x_2^2-2x_2x_1x_2^3}{|x|^4}\Rightarrow\left|\frac{\partial f}{\partial x_2}(x)\right|\leq 5|x|\xrightarrow{x\to 0}0
+		\end{align*}
+		$ f $ ist stetig differenzierbar in $ 0 $.
+		\begin{align*}
+		&\frac{\frac{\partial f}{\partial x_1}(te_2)-\frac{\partial f}{\partial x_2}(0)}{t}=\frac{t^5}{t^4t}=1\Rightarrow\frac{\partial^2 f}{\partial x_2\partial x_1}(0)=1\\
+		&\frac{\frac{\partial f}{\partial x_2}(te_1)-\frac{\partial f}{\partial x_2}(0)}{t}=0\Rightarrow\frac{\partial^2 f}{\partial x_1\partial x_2}(0)=0\neq\frac{\partial f}{\partial x_2\partial x_1}(0)=1
+		\end{align*}
+	\end{beispiel*}
+\end{beispiel*}
+\begin{satz}
+	$ U \subset\R^n $ sei offen, $ f\colon U\rightarrow\R $ sei differnzierbar und bei $ x^0\in U $ sogar 2-mal differenzierbar. Dann gilt
+	\[ \frac{\partial^2 f}{\partial x_i\partial x_j}(x^0)=\frac{\partial^2 f}{\partial x_j\partial x_i}(x^0)\forall i,j\in\lbrace 1,...,n\rbrace. \]
+\end{satz}
+Beachte: In dem Beispiel oben ist das in $ x^0=0 $ nicht erf\"ullt:
+\[ \frac{\partial f}{\partial x_1}(x)=\begin{cases}
+\frac{-x_1^2x_2^3+x_2^5}{|x|^4},&x\neq 0\\0,&x=0
+\end{cases} \]
+\[ \frac{\frac{\partial f}{\partial x_1}(te_1)}{t}=0,\quad\frac{\frac{\partial f}{\partial x_1}(te_2)}{t}=1 \]
+Also ist $ \frac{\partial f}{\partial x_1} $ in $ 0 $ nicht differenzierbar.
+\begin{beweis}
+	$ i,j\in\lbrace 1,...,n\rbrace $ seien fest. Betrachte auf $ W=]-r,r[\times]-r,r[ $ die Funktion \[ g(t,s)\coloneqq f(x^0+te_i+se_j)+f(x^0)=f(x^0+te_i)-f(x^0+sej). \]
+	Das ist f\"ur $ r<1 $, klein genug, definiert. Es ist $ g(t,0)=0 $, $ g(0,s)=0 $.
+	\begin{align*} &\frac{\partial g}{\partial t}(0)=\frac{\partial f}{\partial x_i}(x^0)-\frac{\partial f}{\partial x_i}(x^0)=0,\quad \frac{\partial g}{\partial s}(0)=0\\&\frac{\partial^2}{\partial t^2}(0)=\frac{\partial^2 f}{\partial x_i^2}(x^0)-\frac{\partial^2 f}{\partial x_i^2}(x^0)=0,\quad \frac{\partial^2 g}{\partial s^2}(0)=0 \end{align*}
+	Es gilt
+	\[ \frac{\partial^2 f}{\partial x_i\partial x_j}(x^0)=\frac{\partial^2 g}{\partial t\partial s}(0),\quad \frac{\partial^2 f}{\partial x_j\partial x_i}(x^0)=\frac{\partial^2 g}{\partial s\partial t}(0). \]
+	Sei $ g_1\coloneqq g(\cdot, t) $ und $ g_2\coloneqq g(t,\cdot) $.
+	\[ g(t,t)=g_1(t)=g_1(t)-g_1(0)=\frac{\partial g}{\partial t}(\xi_1,t)\cdot t\quad\text{mit}\quad \xi_1\in]-t,t[. \]
+	Genauso gilt
+	\[ g(t,t)=g_2(t)=g_2(t)-g_2(0)=\frac{\partial g}{\partial s}(t,\xi_2)\quad\text{mit}\quad \xi_2\in]-t,t[. \]
+	\[ \frac{\partial g}{\partial t}(\xi_1,t)=\frac{\partial g}{\partial t}(0)+\underbrace{\frac{\partial^2 g}{\partial t^2}(0)\xi_1+\frac{\partial^2 g}{\partial t\partial s}(0)t}_{\langle\nabla\tfrac{\partial g}{\partial t}(0),(\xi_1,t)}+|(\xi_1,t)|R_1(\xi_1,t)=\frac{\partial^2 g}{\partial t\partial s}(0)t+|(\xi_1,t)|R_1(\xi_1,t) \]
+	\[ \frac{\partial g}{\partial s}(t,\xi_2)=\frac{\partial^2 g}{\partial t\partial s}(0)t+|(t,\xi_2)|R_2(t,\xi_2), \]
+	wobei $ R_1(\xi_1,t)\xrightarrow{t\to 0}0 $ und $ R_2(t,\xi_2)\xrightarrow{t\to 0}0 $. Multipliziere beiden Gleichungen mit $ t $:
+	\[ \frac{\partial g}{\partial t}(\xi_1,t)t=\frac{\partial^2 g}{\partial t\partial s}(0)t^2+t|(\xi_1,t)|R_1(\xi_1,t)\qquad(1) \]
+	\[ \frac{\partial g}{\partial s}(t,\xi_2)t=\frac{\partial^2 g}{\partial s\partial t}(0)t^2+t|(t,\xi_2)|R_2(t,\xi_2)\qquad(2) \]
+	Linke Seite von (1)=Linke Seite von (2)=$ g(t,t) $. Subtrahiere (2) von (1):
+	\[ 0=\left(\frac{\partial^2 g}{\partial t\partial s}(0)-\frac{\partial^2 g}{\partial s\partial t}\right)t^2+t(|(\xi_1,t)|R_2(\xi_1,t)-|(t,\xi_2)|R_2(t,\xi_2)). \]
+	Dividiere durch $ t^2 $:
+	\[ \frac{\partial^2 g}{\partial t\partial s}(0)-\frac{\partial ^2 g}{\partial s\partial t}(0)=\frac{|(t,\xi_2)|}{t}R_2(t,\xi_2)-\frac{|(\xi_1,t)|}{t}R_1(\xi_1,t)\xrightarrow[]{t\to 0}0. \]
+	Hieraus folgt die Behauptung.
+\end{beweis}
+\begin{definition}
+	Ist $ f\colon U\rightarrow\R $, $ U\subset\R^n $ offen, eine 2-mal differenzierbare Funktion, $ x^0\in U $, so setzen wir $ \sH_f(x^0)=\begin{pmatrix}
+	\frac{\partial^2 f}{\partial x_\partial x_j}(x^0)
+	\end{pmatrix}_{i,j=1}^n $ (\deftxt{Hesse-Matrix} von $ f $ in $ x^0 $). Es gilt $ \sH_f(x^0)^t=\sH_f(x^0) $.
+\end{definition}
+\begin{definition}
+	Wir nennen eine Funktion $ f\colon U\rightarrow\R $ $ (k+1)- $mal in $ x^0\in U $ differenzierbar ($ k\geq 2 $), wenn $ f $ sowohl $ k- $mal differenzierbar ist und alle partiellen Ableitungen der Ordnung $ k $ in $ x^0 $ differenzierbar sind.\\
+	Die partiellen Ableitungen $ k- $ter Ordnung sind definiert als
+	\[ \frac{\partial^k f}{\partial x_{i_1}^{\alpha_1}\cdot...\cdot\partial x_{i_l}^{\alpha_l}}=\frac{\partial}{\partial x_{i_1}}\left(\frac{\partial^{k-1}f}{\partial x_{i_1}^{\alpha_1-1}\partial x_{i_2}^{\alpha_2}\cdot...\cdot\partial x_{i_l}^{\alpha_l}}\right),\quad 1\leq i_1<...<i_l\leq n,\alpha_1+....+\alpha_l=k. \]
+\end{definition}
+\begin{lemma}
+	Ist $ f $ wie oben und $ k- $mal differenzierbar in $ x^0\in U $, so gilt
+	\[ \frac{\partial^k f}{\partial x_{i_1}^{\alpha_{i_1}}\cdot...\cdot\partial x_{i_l}^{\alpha_{i_l}}}(x^0)=\frac{\partial^k f}{\partial x_{j_1}^{\beta_{i_1}}\cdot...\cdot\partial x_{j_l}^{\alpha_{j_l}}(x^0)} \]
+	wenn $ \lbrace i_1,...,i_l\rbrace=\lbrace j_1,...,j_l\rbrace $, genauer, wenn $ \exists\sigma $ Permutation von $ \lbrace 1,...,l\rbrace $ mit $ j_1=i_{\sigma(1)} $, $ j_2=i_{\sigma(2)} $,...,$ j_l=i_{\sigma(l)} $, $ \beta_{j_\nu}=\alpha_{i_{\sigma(\nu)}} $, $ 1\leq\nu\leq l $.
+\end{lemma}
+\begin{beispiel*}
+	\[ f(x_1,x_2)=x_1^3x_2,\quad x^0=(1,-1) \]
+	\begin{align*} &\frac{\partial^3}{f}\partial x_1^2\partial x_2=\frac{\partial}{\partial x_2}\left(\frac{\partial^2}{\partial x_1^2}x_1^3x_2\middle)\right|_{x=x^0}=6_{x_1}|_{x=x^0}=6\\
+	&\frac{\partial^4 f}{\partial x_1\partial x_2^3}(x^0)=0\\
+	&\frac{\partial^3 f}{\partial x_1^3} (x^0)=6x_2|_{x=x^0}=-6\end{align*}
+\end{beispiel*}
+\subsection{Taylorentwicklung}
+\begin{satz}[Erinnerung]
+	$ f\colon]x_0-a,x_0+a[\rightarrow\R $ sei $ k- $mal stetig differenzierbar. Dann gibt es zu jedem $ x\in]x_0a,x_0+a[ $ ein $ \xi $ zwischen $ x_0 $ und $ x $ mit
+	\[ f(x)=\sum_{j=0}^{k}\frac{f^{(j)}(x_0)}{j!}(x-x_0)^j+\frac{f^{(k+1)}(\xi)}{(k+1)!}(x-x_0)^{k+1}. \]
+\end{satz}
+\newpage
+\begin{lemma}
+	Sei $ x^0\in\R^n $ und $ W=\lbrace x\mid |x_j-x_j^0|<r,1\leq j\leq n\rbrace $. Ist $ f\colon W\rightarrow\R $ eine $ (k+1)- $mal stetig differenzierbare Funktion, so gibt es zu $ x\in W $ ein $ \tau\in]0,1[ $ mit
+	\[ f(x)-f(x^0)=\sum_{j=1}^{k}\frac{f_{(x,x^0)}^{(j)}(0)}{j!}+\frac{f^{(k+1)}_{(x,x^0)}(\tau)}{(k+1)!} \]
+	wobei $ f_{(x,x^0)}(t)\coloneqq f(x^0+t(x-x^0)) $, $ 0\leq t\leq 1 $. $ f_{x,x^0}(1)=f(x) $, $ f_{x,x^0}(0)=f(x^0) $.
+\end{lemma}
+\begin{bemerkung*}[Vorbetrachtung]
+	\[ f'_{x,x^0}(t)=\frac{\dd}{\dd t}f(x^0+t(x-x^0))=\sum_{j=1}^{n}\frac{\partial f}{\partial x_j}(x^0+t(x-x^0))(x_j-x_j^0) \]
+	\begin{align*} f''_{x,x^0}(t)&=\sum_{j=1}^{n}\frac{\dd}{\dd t}\left(\frac{\partial f}{\partial x_j}(x^0-t(x-x^0))\right)(x_j-x_j^0)\\&=\sum_{j=1}^{n}\sum_{k=1}^{n} \frac{\partial^2 f}{\partial x_k\partial x_j}(x^0+t(x-x^0))(x_k-x_k^0)(x_j-x_j^0)\\&=\left((x_1-x_1^0)\frac{\partial}{\partial x_1}+(x_2-x_2^0)\frac{\partial}{\partial x_2}+...+(x_n-x_n^0)\frac{\partial}{\partial x_n}\right)^2f(x^0+t(x-x^0)) \end{align*}
+	Induktiv:
+	\[ f^{(j)}_{x,x^0}(t)=\left(\sum_{l=1}^{n}(x_l-x_l^0)\frac{\partial}{\partial x_l}\right)^j f(x^0+t(x-x^0)) \]
+	Notation:
+	\[ \frac{\partial^\alpha f}{\partial x^\alpha}(x^0)\coloneqq\frac{\partial^{|\alpha|}f}{\partial x_1^{\alpha_1}...\partial x_n^{\alpha_n}}(x^0),\quad\text{wobei}\quad\alpha=(\alpha_1,...,\alpha_n)\in\N_0^n, |\alpha|\coloneqq=\alpha_1+...+\alpha_n \]
+	F\"ur $ x=(x_1,..,x_n),\alpha\in\N_0^n $ sei $ x^\alpha=x_1^{\alpha_1}...x_n^{\alpha_n} $. Weiter sei $ \alpha!=\alpha_1!\alpha_2!...\alpha_n! $.
+	\begin{beispiel*}
+		\[ (1,2,3)^{(3,2,2)}=2^2\cdot 3^2=36,\quad (4,2,3)!=24\cdot 2\cdot 6=288 \]
+	\end{beispiel*}
+\end{bemerkung*}
+\begin{lemma}
+	$ R $ sei kommutativer Ring mit $ 1 $. Dann gilt f\"ur $ z_1,...,z_n\in R $, $ k\in\N $, der Multinomialsatz:
+	\[ (z_1+...+z_n)^k=\sum_{|\alpha|=k}\frac{k!}{\alpha!}z^{\alpha} \]
+\end{lemma}
+\begin{beispiel*}[Anwendung]
+	$ f,x,x^0 $ wie in der Vorbetrachtung. Dann gilt 
+	\[ \left((x_1-x_1^0)\frac{\partial}{\partial x_1}+...+(x_n-x_n^0)\frac{\partial}{\partial x_n}\right)^kf=\sum_{|\alpha|=k}^{}\frac{k!}{\alpha!}\frac{\partial^\alpha f}{\partial x^\alpha}(x^0)(x-x^0)^\alpha \]
+\end{beispiel*}
+\begin{satz}
+	Sei $ f\colon W\rightarrow\R $ eine $ (k+1)- $mal stetig differenzierbare Funktion auf $ W=\lbrace x\mid |x_j-x_j^0|<r,1\leq j\leq n\rbrace $. Dann gibt es zu jedem $ x\in W $ ein $ \xi_x $ auf der Verbindungsstrecke von $ x^0 $ nach $ x $ mit
+	\[ f(x)=\sum_{\substack{\alpha\in\N^n_0}\\|\alpha|\leq k}^{}\frac{1}{\alpha!}\frac{\partial^\alpha f(x^0)}{\partial x^\alpha}(x-x^0)^\alpha+\sum_{\substack{\alpha\in\N^n_0\\|\alpha|=k+1}}^{}\frac{1}{\alpha!}\frac{\partial^\alpha f(\xi_x)}{\partial x^\alpha}(x-x^0)^\alpha. \] 
+\end{satz}
+\begin{beispiel*}
+	\[ f(x_1,x_2)=\frac{x_1^2-x_2}{1+|x|^2},\quad x^0=(1,1) \]
+	Taylorpolynom $ T_2 f $ f\"ur $ f $ um $ x^0 $ vom Grad 2?
+	\[ y_1=x_1-1,\quad y_2=x_2-1\Rightarrow x_j=y_j+1\] 
+	\begin{align*} f(x)&=\frac{(y_1+1)^2-(y_2+1)}{1+(y_1+1)^2+(y_2+1)^2}\\&=\frac{y_1^2+2y_1-y_2}{3+2y_1+2y_2+|y|^2}\\&=\frac{1}{3}(2y_1-y_2+y_1^2)\frac{1}{1+\frac{2}{3}(y_1+y_2)+\frac{1}{3}|y|^2}\\&=\frac{1}{3}(2y_1-y_2+y_1^2)\sum_{l=0}^{\infty}(-1)^l\left(\frac{2}{3}(y_1+y_2)+\frac{1}{3}|y|^2\right)^l\\&=\frac{1}{3}(2y_1-y_2+y_1^2)\left(1-\left(\frac{2}{3}(y_1+y_2)+\frac{1}{3}|y|^2\right)+...\right)\\&=\frac{1}{3}(2y_1-y_2+y_1^2)\left(1-\frac{2}{3}(y_1+y_2)\right)+\text{Terme mindestens 3. Ordnung}\\&=\frac{1}{3}(2y_1-y_2)-\frac{2}{9}(2y_1-y_1)(y_1+y_2)+\frac{1}{3}y_1^2+(\text{Term }\geq\text{3. Ordnung})\\&
+    =\frac{2}{3}y_1-\frac{1}{3}y_2-\frac{4}{9}y_1^2-\frac{2}{9}y_1y_2+\frac{2}{9}y_2^2\\&=\frac{2}{3}(x_1-1)-\frac{1}{3}(x_2-1)-\frac{4}{9}(x_1-1)^2-\frac{2}{9}(x_1-1)(x_2-1)+\frac{2}{9}(x_2-1)^2   
+    \end{align*}
+\end{beispiel*}
+\subsection{Lokale Extrema}
+\begin{definition}
+	$ U\subset\R^n $ sei offen, $ f\colon U\rightarrow\R $ eine Funktion. Dann hei\ss t $ x^0\in U $ ein \deftxt{lokales $ \begin{cases}
+		\text{Minimum}\\\text{Maximum}
+		\end{cases} $ von $ f $}, wenn $ \exists r>0: B(x^0,r)\subset U $ und $ \begin{cases}
+	f\geq f(x^0)\\f\leq f(x^0)
+	\end{cases} $ auf $ B(x^0,r) $.\\
+	ist $ f $ sogar differenzierbar, so nennen wir $ x^0\in U $ einen \deftxt{kritischen Punkt f\"ur $ f $}, wenn $ \nabla f(x^0)=0 $. 
+\end{definition}
+\begin{lemma}
+	$ f\colon U\rightarrow\R $ sei differenzierbar und habe in $ x^0 \in U$ ein lokales Extremum. Dann ist $ \nabla f(x^0)=0 $. 
+\end{lemma}
+\begin{beweis}
+	Sonst w\"are $ v\coloneqq\nabla f(x^0)\neq 0 $. $ g(t)=f(x^0+tv) $ ist auf $ ]-\delta,\delta[ $ differenzierbar, wenn $ \delta>0 $ klein genug ist. Dann hat $ g $ in $ t=0 $ ein lokales Extremum. Also \[ 0=g'(0)=\langle\nabla f(x^0),v\rangle=|v|^2>0.\lightning \]
+\end{beweis}
+\paragraph{Einschub: Positiv-definite Matrizen:}\mbox{}\\
+$ A=(a_{ij})_{i,j=1}^n\in\R^{n\times n} $ hei\ss t symmetrisch, wenn $ A^t=A $ ($ a_{ij}=a_{ji}\forall i,j=1,...,n $).
+\begin{definition}
+	Man nennt $ A $ \deftxt{positiv-semidefinit}, wenn $ \langle x,Ax\rangle\geq 0 $ f\"ur alle $ x\in\R^n $, $ A $ hei\ss t \deftxt{positiv-definit}, wenn $ \langle x,Ax\rangle>0 $ und $ \langle x,Ax\rangle=0 $ nur, wenn $ x=0 $.\\
+	Entsprechend: $ A $ hei\ss t \deftxt{negativ-(semi)definit}, wenn $ -A $ positiv-(semi)definit ist.\\
+	Ist $ A $ weder positiv- noch negativ-(semi)definit, so hei\ss t $ A $ \deftxt{indefinit}.
+\end{definition}
+\begin{beispiel*}
+	\[ A=\begin{pmatrix}
+	a&b\\b&c
+	\end{pmatrix},\quad\langle x,Ax\rangle=ax^2_1+2bx_1x_2+cx^2_2 \]
+	F\"ur $ a>0 $ wird $ \langle x,Ax\rangle=a(x_1^2+2\frac{b}{a}x_1x_2+\frac{c}{a}x_2^2)=a((x_1+\frac{b}{a}x_2)^2)+(\frac{c}{a}-(\frac{b}{a})^2)x_2^2)\geq 0 $, wenn $ b^2\leq ac $. Also $ A $ positiv semidefinit$ \Leftrightarrow\det A\geq 0 $.\\
+	F\"ur $ a=0 $ wird $ \langle x,Ax\rangle=(2bx_1+cx_2)x_2\Rightarrow A$ indefinit, au\ss er $ b=0 $.
+\end{beispiel*}
+%
+%
+%
+%
+%
+\begin{beispiel}
+	\[ A=\begin{pmatrix}
+	3&1&-2\\1&4&2\\-2&2&6
+	\end{pmatrix} \]
+	F\"ur $ x\in\R^3 $ ist \begin{align*} \langle x,Ax\rangle&=\left\langle \begin{pmatrix}
+	x_1\\x_2\\x_3
+	\end{pmatrix},\begin{pmatrix}
+	3x_1+x_2-2x_3\\x_1+4x_2+2x_3\\-2x_1+2x_2+6x_3
+	\end{pmatrix}\right\rangle\\&=3x_1^2+2x_1x_2-4x_1x_3+4x_2^24x_2x_3+6x_3^2\\&=3\left(x_1^2+\frac{2}{3}x_1x_2-\frac{4}{3}x_1x_3\right)+4x_2^2+4x_2x_3+6x_3^2\\&=3\left(x_1^2+2x_1\left(\frac{x^2}{3}-\frac{2}{3}x_3\right)\right)+4x_2^2+4x_2x_3+6x_3^2\\&=3\left(x_1+\frac{x_2}{3}-\frac{2}{3}x_3\right)^2-3\left(\frac{x_2}{3}-\frac{2x_3}{3}\right)^2+4x_2^2+4x_2x_3+6x_3^2\\&=3\hat x_1^2+\frac{11}{3}x_2^2+\frac{16}{3}x_2x_3+\frac{14}{3}x_3^2\\&=3\hat x_1^2+\frac{11}{3}\left(x_2^2+\frac{16}{11}x_2x_3+\frac{14}{11}x_3^2\right)\\&=3\hat x_1^2+\frac{11}{3}\left(\left(x_2+\frac{8}{11}x_3\right)^2+\left(\frac{14}{11}-\left(\frac{8}{11}\right)^2\right)x_3^2\right)\\&=3\hat x_1^2+\frac{11}{3}\hat x_2^2+\frac{11}{3}\cdot\frac{90}{121}x_3^2\\&=3\hat x_1^2+\frac{11}{3}\hat x_2^2+\frac{30}{11}\hat x_3^2\\&=\langle\hat x,D\hat x\rangle,\quad D\coloneqq \begin{pmatrix}
+	3&0&0\\0&\frac{11}{3}&0\\0&0&\frac{30}{11}
+	\end{pmatrix} \end{align*}
+	\[ \hat x=Wx,\quad W\coloneqq \begin{pmatrix}
+	1&\frac{1}{3}&-\frac{2}{3}\\0&1&\frac{8}{11}\\0&0&1
+	\end{pmatrix} \]
+	Also ist
+	\[ \langle\hat x,D\hat x\rangle=\langle Wx,DWx\rangle=\langle x,W^tDwx\rangle. \]
+	Gilt $ \langle x,Ax\rangle=\langle x,Bx\rangle $ f\"ur alle $ x\in\R^n $, so $ A=B $. Das hei\ss t, $ A=W^tDW $, $ S\coloneqq W^{-1}=\begin{pmatrix}
+	1&-\frac{1}{3}&\frac{10}{11}\\0&1&-\frac{8}{11}\\0&0&1
+	\end{pmatrix} $.
+\end{beispiel}
+\begin{satz}
+	$ U\subset\R^n $ sei offen, $ x^0\in U $, $ f\colon U\rightarrow\R $ sei 2-mal stetig differenzierbar. Ist $ \nabla f(x^0)=0 $ und $ \sH_f(x^0) $ $ \begin{cases}
+	\text{positiv}\\\text{negativ}
+	\end{cases} $ definit, so hat $ f $ bei $ x^0 $ ein lokales $ \begin{cases}
+	\text{Minimum}\\\text{Maximum}
+	\end{cases} $.
+\end{satz}
+\begin{beweis}
+	Sei etwa $ \sH_f(x^0) $ positiv definit. Dann gibt es ein $ c>0 $ mit $ \langle v,\sH_f(x^0)v\rangle\geq 2c|v|^2 $ (denn $ \xi\mapsto\langle\xi,\sH_f(x^0)\xi\rangle $ h\"angt stetig von $ \xi $ ab und nimmt auf $ \partial B(0,1) $ ein Minimum an, etwa in $ \xi^0 $; offenbar ist $ \langle\xi,\sH_f(x^0)\xi^0\rangle 2c>0 $; ist $ v\in\R^n\setminus\lbrace 0\rbrace $, so $ \frac{v}{|v|}\in\partial B(0,1) $, also $ \left\langle\frac{v}{|v|},\sH_f(x^0)\frac{v}{|v|}\right\rangle\geq 2c$).\\
+	Es gilt f\"ur jedes $ x\in B(x^0,\delta) $, $ \delta>0 $ klein genug:
+	\[ f(x)=f(x^0)+\langle\nabla f(x^0),x-x^0\rangle+\frac{1}{2}\langle x-x^0,\sH_f(t_x)(x-x^0)\rangle \]
+	$ t_x $ auf der Verbindungslinie von $ x^0 $ nach $ x $ (innerhalb $ B(x^0,\delta) $). Aber $ \nabla f(x^0)=0 $; also
+	\begin{align*} f(x)&=f(x^0)+\frac{1}{2}\langle x-x^0,\sH_f(x^0)(x-x^0)\rangle+\frac{1}{2}\langle x-x^0,(\sH_f(t_x)-\sH_f(x^0))(x-x^0)\rangle\\&\geq f(x^0)+c|x-x^0|^2+\frac{1}{2}\langle x-x^0,(\sH_f(t_x)-\sH_f(x^0))(x-x^0)\rangle. \end{align*}
+	Aber $ \norm{\sH_f(t_x)-\sH_f(x^0)}\leq\frac{c}{4} $, wenn $ \delta $ klein genug ist. Somit wird \[ \frac{1}{2}\langle x-x^0,(\sH_f(t_x)-\sH_f(x^0))(x-x^0)\rangle\geq-\frac{c}{8}|x-x^0|^2. \]
+	Es folgt
+	\[ f(x)\geq f(x^0)+\frac{7}{8}c|x-x^0|^2\geq f(x^0) \]
+	auf $ B(x^0,\delta) $.\\
+	Ist $ \sH_f(x^0) $ negativ-definit, wiederhole Argument f\"ur $ -f $.
+\end{beweis}
+\begin{beispiel*}
+	\[ f(x)\coloneqq (2x_1-x_2^2)e^{-|x|^2}\quad\text{in}\quad\R^2 \]
+	Lokale Extrema f\"ur $ f $?
+	\begin{align*}
+	&\nabla f=(f_{x_1},f_{x_2})\\
+	&f_{x_1}=2e^{-|x|^2}-2x_1(2x_1-x_2^2)e{-|x|^2}=2e^{-|x|^2}(1-2x_1^2+x_1x_2^2)\\
+	&f_{x_2}=-2xe^{-|x|^2}-2x_2(2x_1-x_2^2)e^{-|x|^2}=-2x_2e^{-|x|^2}(1+2x_1-x_2^2)
+	\end{align*}
+	Sei $ \nabla f(x)=0 $. Ist $ x_2=0 $, so $ x_1\in\left\lbrace-\frac{1}{\sqrt{2}},\frac{1}{\sqrt 2}\right\rbrace $. Ist $ x_2\neq 0 $, so $ x_2^2-2x_1=1 $ und $ 2x_1^2-x_1x_2^2=1 $, so existiert kein geeignetes $ x_1 $. Also
+	\[ \lbrace x\mid\nabla f(x)=0\rangle=\left\lbrace-\frac{1}{\sqrt{2}}e_1,\frac{1}{\sqrt 2}e_1\right\rbrace. \]
+	\begin{align*}
+      & f_{x_1,x_1}(x)=-4x_1e^{-|x|^2}(1-2x_1^2)+2e^{-|x|^2}(-4x_1)\quad\text{auf}\quad\lbrace x_2=0\rbrace\\
+      &f_{x_1,x_2}(x)=-4x_2e^{-|x|^2}(1-2x_1^2+x_1x_2^2)+2e^{-|x|^2}2x_1x_2=0\quad\text{auf}\quad\lbrace x_2=0\rbrace\\
+      &f_{x_2,x_2}(x)=(-2e^{-|x|^2}+4x_2^2e^{-|x|^2})(1+2x_1)-2x_2e^{-|x|^2}(-4x_2)=-2(1+2x_1e^{-|x|^2})\quad\text{auf}\quad\lbrace x_2=0\rbrace\\
+      &\sH_f\left(-\frac{1}{\sqrt 2}e_1\right)=\begin{pmatrix}
+      -\frac{8}{\sqrt 2}e^{-\frac{1}{2}}&0\\0&-2(1-\sqrt 2)e^{-\frac{1}{2}}
+      \end{pmatrix}\quad\text{positiv-definit}\\&\sH_f\left(\frac{1}{\sqrt 2}e_1\right)=-2e^{-\frac{1}{2}}\begin{pmatrix}
+      2\sqrt 2&0\\0&1+\sqrt 2
+      \end{pmatrix}\quad\text{negativ-definit}
+	\end{align*}
+	$ -\frac{1}{\sqrt 2}e_1: $lokales Minimum, $ \frac{1}{\sqrt 2}e_1: $lokales Maximum f\"ur $ f $.\\
+	Sind das absolute Extrema?
+\end{beispiel*}
+\section{Lokale Inverse und implizite Funktionen}
+\subsection{Lokale Inverse}
+\begin{bemerkung*}[Vorbetrachtung]
+	$ A\in\R^{n\times n} $ sei invertierbar, $ f(x)=Ax+b $ hat eine inverse Abbildung$ \Leftrightarrow\det A\neq 0 $, $ (f^{-1}(y)=A^{-1}(y-b)) $.\\
+	ist nun $ f(x)=b+Ax+R(x) $, $ |R(x)|\leq c|x|^2 $, so kann man hoffen, dass $ \exists g\colon B(b,\delta)\rightarrow\R^n $, $ f(g(y))=y $ auf $ B(b,\delta) $.
+\end{bemerkung*}
+\begin{satz}
+	Sei $ U_1,V\subset\R^n $ offen, $ f\colon U_1\rightarrow V $ sei bijektiv und $ k- $mal stetig differenzierbar, $ k\geq 1 $; ist $ \det J_f(x)\neq 0 $ f\"ur alle $ x\in U_1 $, so ist $ g\coloneqq f^{-1}\colon V\rightarrow U_1 $ ebenfalls $ k- $mal stetig differenzierbar, wenn nur $ g $ stetig ist; dann ist $ F_g(f(x))=J_f(x)^{-1} $, $ x\in U_1 $.
+\end{satz}
+\begin{beweis}
+	Sei $ x_1\in U_1 $, $ y_1=f(x_1) $, $ M=J_f(x_1)^{-1} $. Zeige:
+	\begin{enumerate}
+		\item $ \exists\delta_0>0 $ mit $ |g(y)-g(y_1)|\leq 2\norm{M}|y-y_1| $ auf $ B(y_1,\delta_0) $.
+		\item $ g $ ist differenzierbar in $ y_1 $, $ J_g(y_1)=J_f(x_1)^{-1} $.
+	\end{enumerate}
+	\begin{description}
+		\item[zu i)] Es gilt \[ f(x)=f(x_1)+J_f(x_1)(x-x_1)+|x-x_1|R(x_1,x), \]
+		wobei $ |R(x_1,x)|\xrightarrow{x\to x_1}0 $. W\"ahle $ r>0 $ mit $ |R(x_1,x)|\leq\frac{1}{2\norm{M}} $, wenn $ |x-x_1|<r $. Da $ g $ in $ y_1 $ stetig ist, gilt mit kleinem $ \delta_0>0 $: $ |g(y_1)-x_1|<r $, wenn $ y\in B(y_1,\delta_0) $. Es folgt
+		\[ y-y_1=f(g(y))-f(g(y_1))=J_f(x_1)(g(y)-x_1)+|g(y)-x_1|R(x_1,g(y)) \]
+		auf $ B(y_1,\delta_0) $. Weiter:
+		\[ M(y-y_1)=g(y)-x_1+|g(y)-x_1|M\cdot R(x_1,g(y)) \]
+		\[ |g(y)-x_1|=|M(y-y_1)-(g(y)-x_1)M\cdot R(x_1,g(y))|\leq \norm{M}|y-y_1|+\norm{M}\frac{1}{2\norm{M}}|g(y)-x_1| \]
+		auf $ B(y_1,\delta_0) $. Also $ |g(y)-x_1|\leq 2\norm{M}|y-y_1| $ auf $ B(y_1,\delta_0) $.
+		\item[zu ii)]
+		\[ \frac{g(y)-x_1-M(y-y_1)}{|y-y_1|}=-\frac{|g(y)-x_1|}{|y-y_1|}M\cdot R(x_1,g(y))\xrightarrow{y\to y_1}0 \]
+		Also ist $ g $ differenzierbar in $ y_1 $. F\"ur $ y\in V $ sei $ x=g(y) $. Dann ist $ J_g(y)=J_f(g(y))^{-1} $.
+		\[ \frac{\partial g_i}{partial y_j}(y)=\pm\frac{1}{\det J_f(g(y))}\det\left(\frac{\partial f_l}{\partial x_p}g(y)\right)_{\substack{l\neq i\\p\neq j}}\qquad(\ast) \]
+		ist stetig; also $ g $ stetig differenzierbar.\\
+		Sei $ \nu<k $ und schon bewiesen, dass $ g $ $ \nu- $mal stetig differenzierbar ist. Wegen $ \nu+1\leq k $ und $ (\ast) $ ist $ \frac{\partial g_i}{\partial y_j} $ sogar $ \nu- $mal stetig differenzierbar. $ g $ ist also $ (\nu+1)- $mal stetig differenzierbar.
+	\end{description}
+\end{beweis}
+\begin{satz}[Existenz der lokalen Inversen]
+	Sei $ f\colon U\rightarrow\R^n $ eine k-mal stetig differenzierbare Abbildung, $ U\subset\R^n $ offen; sei $ x^0\in U $ mit $ \det J_f(x^0)\neq 0 $; $ y^0=f(x^0) $. Dann gibt es offene Umgebungen $ U_1\ni x^0 $, $ V_1\ni y^0 $, so dass $ f\colon U_1\rightarrow V_1 $ bijektiv wird und die (lokale) Inverse $ g\coloneqq (f|_{U_1})^{-1} $ wieder k-mal stetig differnzierbar. (Ist $ \tilde y\in V_1 $, so ist $ f(x)=\tilde y $ eindeutig nach $ x $ aufl\"osbar) 
+\end{satz}
+\begin{beweis}
+	Ersetze $ f $ durch $ \hat f(x)=f(x+x^0)-y^0 $, dann ist $ \hat f(0)=0 $; ist $ \hat g $ lokale Inverse f\"ur $ \hat f $ nahe $ 0 $, so findet man auch eine lokale Inverse $ g $ f\"ur $ f $ nahe $ x^0 $; dann $ f(x)=y^0+\hat f(x-x^0) $. Daher OdBA: $ x^0=y^0=0 $. Gesucht ist eine stetige lokale Inverse $ g $ f\"ur $ f $. Daraus folgt dann mit Satz 2.2.1.1 die Behauptung.\\
+	Sei $ \delta_0>0 $, $ B(0,\delta_0)\subset U $, f\"ur $ 0\delta\leq\delta_0 $ und $ y\in B(0,\delta) $ setze $ h^y(x)\coloneqq x-J_f(0)^{-1}(f(x)-y) $ auf $ \overline{B(0,\delta)}\eqqcolon K_\delta $.
+	\[ J_{h^y}(x)=E-J_f(0)^{-1}J_f(x); \]
+	ist $ \delta $ klein genug, so $ \norm{J_{h^y}(x)}\leq\frac{1}{10n^2} $ f\"ur $ x\in K_\delta $; mit Mittelwertsatz f\"ur jede Koordinate $ h_l^y $ folgt dann 
+	\[ |h^y(x)-h^y(\tilde x)|\leq\frac{1}{2}|x-\tilde x|,\quad x,\tilde x\in K_\delta. \]
+	Mit $ c_1\coloneqq\frac{\delta}{1+\norm{J_f(0)^{-1}}} $ gilt
+	\[ |h^y(x)|\leq|h^y(0)|+|h^y(x)-h^y(0)|\leq\norm{J_f(0)^{-1}}|y|+\frac{1}{2}|x|<\delta \]
+	wenn $ |y|\leq c_1\delta $. Also ist $ h^y\coloneqq K_\delta\rightarrow K_\delta $ kontrahierend; sei $ g(y) $ Fixpunkt f\"ur $ h^y $ ($ z_1=0 $, $ z_{m+1}=h^y(z_m) $, $ (z_m)_m $ konvergiert). Aus $ h^y(g(y))=g(y) $ folgt $ f(g(y))=y $.
+	\[ U_2\coloneqq f^{-1}(B(0,c_1\delta)\cap B(0,\Delta)),\quad V_2=B(0,c_1\delta); \]
+	dann ist $ f\colon U_2\rightarrow V_2 $ surjektiv; seien $ x,\tilde x\in U_2 $ mit $ f(x)=f(\tilde x)\eqqcolon y $. Dann sind $ x $ und $ \tilde x $ Fixpunkte f\"ur $ h^y $. Da $ h^y $ kontrahierend ist, gilt dann $ x=\tilde x $ und somit ist $ f\colon U_2\rightarrow V_2 $ injektiv.
+	\[ U_1=f^{-1}(B(0,7/8 c_1\delta)\cap B(0,7/8 \delta),\quad V_1=B(0,7/8 c_1\delta) \]
+	Behauptung: $ g\colon V_1\rightarrow U_1 $ ist stetig. Sei $ y^\ast\in V_1 $ und angenommen, $ g $ sei unstetig in $ y^\ast $. Dann existiert eine Folge $ (y_l)_l\subset V_1 $ mit $ \lim_{l\to\infty} y_l=y^\ast $ aber $ \lim_{l\to\infty} g(y_l)=\hat x\neq g(y^\ast) $. Aber:
+	\[ f(\hat x)=\lim_{l\to\infty}f(g(y_l))=\lim_{l\to\infty}y_l=y^\ast\lightning \]    
+\end{beweis}
+\subsection{S\"atze \"uber implizite Funktionen}
+Sei $ \sA\in\R^{d\times n} $, $ d<n $; $ \rangle(\sA)=d $. Sind die Spalten $ i_1,...,i_d $ linear unabh\"angig, so ist die Matrix $ (\sA e_{i_1},...,\sA e_{i_d}) $ invertierbar; dann ist das lineare Gleichungssystem $ Ax=0 $ nach $ x_{i_1},...,x_{i_d} $ l\"osbar:
+\[ x_{i_\nu}=L_\nu(x_{j_1},...,x_{j_{n-d}}), 1\leq\nu\leq d,\lbrace j_1,...,j_{n-d}\rbrace=\lbrace 1,...,n\rbrace\setminus\lbrace i_1,...,i_d\rbrace,\]
+wobei $ L_\nu $ Linearformen sind (implizite Funktionen).
+\begin{satz}[Implizite Funktionen]
+	Sei $ f\colon U\rightarrow\R^d $ eine k-mal stetig differenzierbare Abbildung, $ U\subset\R^n $ offen, $ x^0\in U $, $ d<n $, $ y^0=f(x^0) $. Ist $ \rang(J_f(x^0))=d $ und die ersten $ d $ Spalten von $ J_f(x^0) $ linear unabh\"angig, so gibt es offene Umgebungen $ U^\ast\ni x^{0,\ast} $, $ U^{\ast\ast}\ni x^{0,\ast\ast} $ und eine k-mal stetig differenzierbare Abbildung $ \Phi\colon U^{\ast\ast}\rightarrow U^{\ast} $ mit $ x^{0,\ast}=\Phi(x^{0,\ast\ast}) $, so dass \[ U^\ast\times U^{\ast\ast}\cap\lbrace x\mid f(x)=y^0\rbrace=\lbrace x\in U^\ast\times U^{\ast\ast}\mid x^\ast=\Phi(x^{\ast\ast})\rbrace. \]
+	Dabei ist f\"ur $ x=(x_1,...,x_d,x_{d+1},...,x_n) $: $ x^\ast=(x_1,...,x_d) $ und $ x^{\ast\ast}=(x_{d+1},...,x_n) $.
+\end{satz}
+\begin{beweis}
+	Ersetze $ f $ durch $ f=y^0 $; OBdA $ y^0=0 $.
+	\[ F(x)\coloneqq \begin{pmatrix}
+	f(x)\\x^{\ast\ast}
+	\end{pmatrix}\colon U\rightarrow\R,\quad J_F(x)=\begin{pmatrix}
+	J_f(x)&\\0&E_{n-d}
+	\end{pmatrix},\quad \det J_F(x)=\det\left(\frac{\partial f_i}{\partial x_j}(x)\right)_{i,j=1}^d,\quad\det J_F(x^0)\neq 0 \]
+	Es existiert $ G\colon V_1\rightarrow U_1 $ k-mal stetig differenzierbar Inverse zu $ F $, wobei $ U_1 $ offene Umgebung von $ x^0 $, $ V_1\ni \begin{pmatrix}
+	0\\x^{0,\ast\ast}
+	\end{pmatrix} $ offen. Es gilt f\"ur $ x\in U_1: $ \[ f(x)=0\Leftrightarrow F(x)= \begin{pmatrix}
+	0\\x^{\ast\ast}
+	\end{pmatrix}\Leftrightarrow x=G \begin{pmatrix}
+	0\\ x^{\ast\ast}
+	\end{pmatrix}, \]
+	w\"ahle $ \Phi(x^{\ast\ast}=G \begin{pmatrix}
+	0\\x^{\ast\ast}
+	\end{pmatrix} $. Dann finden wir auch $ U^\ast, U^{\ast\ast} $; $ \Phi $ ist k-mal stetig differenzierbar, da $ F $ und damit auch $ G $ es sind.
+\end{beweis}
+\begin{beispiel*}
+	\[ f(x_1,x_2,x_2)=x_1^2x_2-x_3^2+\sin(\pi x_1x_3),\quad x^0=(1,1,1)  \]
+	\begin{align*}
+	&f_{x_1}=2x_1x_2+\pi x_3\cos(\pi x_1x_3),\quad f_{x_1}(x^0)=2-\pi\neq 0
+	\end{align*}
+	Also existiert ein $ \delta>0 $ mit $ \Phi]1-\delta,1+\delta[\times]1-\delta,1+\delta[\rightarrow\R $ stetig differenzierbar (unendlich oft) und $ f(\Phi(x_2,x_3),x_2,x_3)=0 $, $ \Phi(1,1)=1 $. Was ist $ \nabla\Phi(1,1) $? Bilde $ \frac{\partial}{\partial x_j}f(\Phi(x_2,x_3),x_2,x_3)=0 $.
+	\[ \frac{\partial f}{\partial x_1}(\Phi(x^{\ast\ast}),x^{\ast\ast})\frac{\partial\Phi}{\partial x_j}(x^{\ast\ast})+\frac{\partial f}{\partial x_j}(\Phi(x^{\ast\ast}),x^{\ast\ast})=0 \]
+	\[ \frac{\partial\Phi}{\partial x_j}(1,1)=-\frac{\frac{\partial f}{\partial x_j}(1,1,1)}{\frac{\partial f}{\partial x_1}(1,1,1)}=-\frac{1}{2-\pi}\frac{\partial f}{\partial x_j}(x^{0}= \begin{cases}
+	\frac{-1}{2-\pi},&j=1\\\frac{2+\pi}{2-\pi},&j=3
+	\end{cases} \]
+	\[ \Phi(x_2,x_3)=1-\frac{1}{2-\pi}(x_2-1)+\frac{2+\pi}{2-\pi}(x_3-1)+... \]
+\end{beispiel*}
+%
+%
+%
+%
+%
+%
+%
+%
