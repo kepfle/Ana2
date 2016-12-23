@@ -200,4 +200,278 @@ l\"osen.
 	Dann ist $ w(s)=y(s+\zeta)-\eta $ L\"osung zu 
 	\[ w'(s)=f\left(\frac{a_1s+a_1\zeta+b_1w+b_1\eta+c_1}{a_2s+a_2\zeta+b_2w+b_2\eta+c_2}\right)=f\left(\frac{a_1s+b_1w}{a_2s+b_2w}\right)=F\left(\frac{w(s)}{s}\right),\quad F(z)=f\left(\frac{a_1+b_1z}{a_2+b_2z}\right). \]
 	$ w $ l\"ost eine DGL vom Typ 3.3.5.
+	\item[2. Fall:] $ \left(\begin{smallmatrix}
+	a_1&b_1\\a_2&b_2
+	\end{smallmatrix}\right) $ ist nicht invertierbar. Wenn $ a_2=b_2=0 $, so $ y'=f\left(\frac{a_1}{c_1}t+\frac{b_1}{c_2}y+\frac{c_1}{c_2}\right) $ f\"allt unter Fall 3.3.4.\\
+	Sei $ (a_2,b_2)\neq(0,0) $, dann $ (a_1,b_1)=\lambda(a_2,b_2) $, $ \lambda\in\R $. $ u\coloneqq a_2t+b_2y $ l\"ost \[ u'=a_2+b_2y'=a_2+b_2f\left(\frac{\lambda u+c_1}{u+c_2}\right). \]
+	Keine Variable $ t $ tritt rechts auf. \\
+	$ F $ sei Stammfunktion zu $ \frac{1}{a_2+b_2 f\left(\frac{\lambda x+c_1}{x+c_2}\right)} $. Dann $ \frac{u'}{a_2+b_2 f\left(\frac{\lambda u+c_1}{u+c_2}\right)}=1 $, $ (F\circ u)'=1 $, $ F(u(t))=t+C $.
 \end{description}
+\begin{beispiel*}
+\begin{enumerate}
+	\item[]
+	\item \[ y'=-\frac{4t+3y-1}{3t+4y+1},\quad f(x)\coloneqq -x \]
+	$ a_1=4 $, $ b_1=3 $, $ c_1=-1 $, $ b_2=4 $, $ c_2=1 $, $ \left|\begin{smallmatrix}
+	4&3\\3&4
+	\end{smallmatrix}\right|=7 $; $ \left(\begin{smallmatrix}
+	4&3\\3&4
+	\end{smallmatrix}\right)\left(\begin{smallmatrix}
+	\zeta\\\eta
+	\end{smallmatrix}\right)=\left(\begin{smallmatrix}
+	1\\-1
+	\end{smallmatrix}\right) $ l\"osen: $ \zeta=1,\eta=-1 $.\\
+	$ w(s)=y(s+1)+1 $ l\"ost $ w'=-\frac{4s+3w}{3s+4w} $, $ v=\frac{w}{s} $ l\"ost
+	\[ v'=-\frac{1}{s}\left(v+\frac{4+3v}{3+4v}\right)=-\frac{1}{s}\frac{4v^2+6v+4}{4v+3}\Rightarrow\frac{4v+3}{4v^2+6v+4}v'=-\frac{1}{s} \]
+	\[ \log(4v^2+6v+4)'=(-2\log s)' \]
+	\[ \log(4v^2(s)+6v(s)+4)=-2\log s+\log(4v(1)^2+6v(1)+4) \]
+	nahe $ s=1 $.
+	\[ 4v(s)^2+6v(s)+4=\underbrace{(4v(1)^2+6v(1)+4)}_{\eqqcolon C}\frac{1}{s^2} \]
+	\[ v(s)^2+\frac{3}{2}v(s)=\frac{C}{4s^2}-1 \]
+	\[ \left(v(s)+\frac{3}{4}\right)^2=\frac{C}{4s^2}-\frac{7}{16}=\frac{4c-7s^2}{16s^2},\quad |s|<\frac{4C}{7} \]
+	\[ v(s)=-\frac{3}{4}+\frac{1}{4s}\sqrt{4C-7s^2} \]
+	\[ w(s)=-\frac{3}{4}s+\sqrt{4C-7s^2} \]
+	\[ y(t)=w(t-1)-1=-\frac{3}{4}(t-1)+\sqrt{4C-7(t-1)^2},\quad w(1)=v(1), y(2)=w(1)-1 \]
+	\item \[ y'=\frac{4t+2y+3}{2t+y+1} \]
+	$ \left|\begin{smallmatrix}
+	4&2\\2&1
+	\end{smallmatrix}\right|=0 $. $ u(t)=2t+y $ l\"ost
+	\[ u'=2+y'=2+\frac{2u+3}{u+1}=\frac{4u+5}{u+1}\Rightarrow \frac{u+1}{4u+5}u'=1 \]
+	\[ \left(\frac{u+\frac{5}{4}}{4u+5}-\frac{1}{4}\frac{1}{4u+5}\right)u'=1 \]
+	\[ \left(1-\frac{1}{4u+5}\right)u'=4\Rightarrow \left(u-\frac{1}{4}\log(4u+5)\right)'=4 \]
+	\[ u(t)=\frac{1}{4}\log(4u(t)+5)=4t+C \]
+	\[ 2t+y(t)-\frac{1}{4}\log(8t+5+4y(t))=4t+C \]
+	Geben wir vor: $ y(0)=0 $, so $ C=-\frac{1}{4}\log 5 $. Differenziere und werte in $ t=0 $ aus: Taylorpolynome f\"ur $ y(t) $ von beliebiger Ordnung berechenbar. $ y(0)=0, y'(0)=3 $; aus $ 2+y'(t)-\frac{y'(t)+8}{8t+5+4y(t)}=4 $, nochmaliges Ableiten: $ y''(0) $.
+\end{enumerate}
+\end{beispiel*}
+\section{Systeme linearer Differentialgleichhungen erster Ordnung}
+$ I\subset\R $ sei ein Intervall, $ t_0\in I $; $ A\colon I\rightarrow\K^{n\times n} $ sei stetig. Studiere $ u'=A\cdot u $ f\"ur $ u\colon I\rightarrow\K^n $ (dabei $ \K=\R $ oder $ \K=\C $).
+\changesection
+\begin{satz}
+	Ist $ u_0\in\K^n $, so hat das AWP
+	\[ \begin{cases}
+	y'=Ay\\y(t_0)=u_0
+	\end{cases} \]
+	genau eine L\"osung $ u\colon I\rightarrow\K^n $.
+\end{satz}
+\begin{beweis}
+	\begin{description}
+		\item[Existenz:] \[ u_1(t)\coloneqq u_0+\int_{t_0}^t A(s)u_0\dd s,\quad t\in I \]
+		Ist $ u_k\colon I\rightarrow\K^n $ schon definiert, so setze \[ u_{k+1}(t)=u_0+\int_{t_0}^t A(s)u_k(s)\dd s.\qquad (+) \]
+		Behauptung: Auf jedem kompakten Intervall $ J\subset I $, $ t_0\in J $, konvergiert die Folge $ (u_k)_k $ gleichm\"a\ss ig.\\
+		Dazu: F\"ur $ j>l $ ist
+		\[ u_j(t)-u_l(t)=\sum_{k=l}^{j-1}(u_{k+1}(t)-u_k(t)). \]
+		Also
+		\[ |u_j(t)-u_l(t)|\leq\sum_{k=l}^{j-1}|u_{k+1}(t)-u_k(t)| \]
+		$ M\coloneqq\sup_{x\in J}\norm{A(x)} $:
+		\[ |u_{k+1}(t)-u_k(t)|\leq\frac{M^{k+1}}{(k+1)!}|u_0||t-t_0|^{k+1} \]
+		Induktion nach $ k $: $ k=0 $:
+		\[ |u_1(t)-u_0|=\left|\int_{t_0}^t A(s)u_0\dd s\right|\leq M|u_0||t-t_0| \]
+		Gilt die Ungleichung f\"ur $ k-1 $, so auch f\"ur $ k $:
+		\begin{align*}
+		u_{k+1}(t)-u_k(t)&=\int_{t_0}^t A(s)u_k(s)\dd s-\int_{t_0}^t A(s)u_{k-1}(s)\dd s\\
+		&=\int_{t_0}^t A(s)(u_k(s)-u_{k-1}(s))\dd s
+		\end{align*}
+		\begin{align*}
+		|u_{k+1}(t)-u_k(t)|&\leq\int_{t_0}^t\norm{A(s)}|u_{k}(s)-u_{k-1}(s)|\dd s\\
+		&\leq M\int_{t_0}^t\frac{M^k}{k!}|u_0|(s-t_0)^k\dd s\\
+		&=\frac{M^{k+1}}{(k+1)!}|u_0||t-t_0|^{k+1}
+		\end{align*}
+		Ist $ J\subset [t_0-R,t_0+R] $, so \[ \max_{t\in J}|u_{k+1}(t)-u_k(t)|\leq\frac{(MR)^{k+1}}{(k+1)!}|u_0|. \]
+		Also
+		\[ \max_{t\in J}|u_j(t)-u_l(t)|\leq|u_0|\sum_{k=l}^{j-1}\frac{(MR)^{k+1}}{(k+1)!}. \]
+		$ (u_j)_j $ erf\"ullt das Cauchykriterium in der gleichm\"a\ss igen Konvergenz auf $ J $.\\
+		Sei $ u(t)\coloneqq\lim_{j\to\infty}u_j(t) $. Dann ist $ u $ stetig auf $ J $. Aus $ (+) $ folgt: $ u(t)=u_0\int_{t_0}^t A(s)u(s)\dd s $ ist stetig differenzierbar. Weiter $ u'(t)=A(t)u(t) $, $ u(t_0)=u_0 $, auf $ J $.
+		\item[Eindeutigkeit auf $ J $:] Sei $ w\colon J\rightarrow\K^n $ eine L\"osung zu $ w'=Aw $ mit $ w(t_0)=0 $. Behauptung: $ w=0 $.\\
+		Sei $ \delta\coloneqq\frac{1}{2M}>0 $. Wir zeigen $ w|_{[t_0,t_0+\delta]}=0 $, analog $ w|_{[t_0-\delta,t_0]}=0 $.\\
+		F\"ur $ t_0\leq t\leq t_0+\delta $ gilt \[ w(t)=\int_{t_0}^t w'(s)\dd s=\int_{t_0}^t A(s)w(s)\dd s. \]
+		Also
+		\[ |w(t)|\leq\delta M\max_{[t_0,t_0+\delta]}|w|\Rightarrow \max_{[t_0,t_0+\delta]}|w|\leq\frac{1}{2}\max_{[t_0,t_0+\delta]}|w|. \]
+		Hieraus folgt die Behauptung.
+	\end{description}
+
+\end{beweis}
+Somit: $\begin{cases}
+y'=Ay\\y(t_0)=u_0
+\end{cases}$ hat auf jedem kompakten Intervall $ J\subset I $, $ t_0\in J $, genau eine L\"osung $ u_J $. W\"ahle Intervallfolge $ (J_k)_k $, $ t_0\in J_k $, $ J_k\subset J_{k+1} $, $ I=\bigcup_{k=1}^\infty J_k $. $ u_{J_{k+1}} $ und $ u_{J_k} $ l\"osen auf $ J_k $ dasselbe AWP. Hieraus folgt $ u_{J_{k+1}}|_{J_k}=u_{J_k} $. Setze also $ u(t)=u_{J_k}(t) $, wenn $ t\in J_k $.
+%
+%
+%
+%
+%
+\begin{beispiel*}
+	$ A=\begin{pmatrix}
+	-5&-6\\3&4
+	\end{pmatrix} $, $ B(t)=\binom{e^t}{2} $, $ u_0=\binom{3}{1} $, $ t_0=0 $.
+	\begin{description}
+		\item[1. Schritt:] $ W $ bestimmen: \[ \chi_A(x)=\left|\begin{smallmatrix}x+5&6\\-3&x-4\end{smallmatrix}\right|=x^2+x-2=(x-1)(x+2). \]
+		\[ A\binom{x_1}{x_2}=\binom{x_1}{x_2};\begin{smallmatrix}
+		-5x_1-6x_2=-x_1\\x_1=-x_2
+		\end{smallmatrix}\Rightarrow A\binom{1}{-1}=\begin{pmatrix}
+		-5&-6\\3&4
+		\end{pmatrix}\binom{1}{-1}=\binom{1}{-1} \]
+		\[ A\binom{x_1}{x_2}=-2\binom{x_1}{x_2};\begin{smallmatrix}
+		-5x_1-6x_2=-2x_1\\x_1=-2x_2
+		\end{smallmatrix}\Rightarrow A\binom{-2}{1}=\begin{pmatrix}
+		-5&-6\\3&4
+		\end{pmatrix}\binom{-2}{1}=\binom{4}{-2} \]
+		\[ W(t)=\begin{pmatrix}
+		e^t&-2e^{-2t}\\
+		-e^t&e^{-2t}
+		\end{pmatrix},\quad W'= \begin{pmatrix}
+		e^t&4e^{-2t}\\-e^t&-2e^{-2t}
+		\end{pmatrix},\quad AW=\begin{pmatrix}
+		-5&-6\\3&4
+		\end{pmatrix}\begin{pmatrix}
+		e^t&-2e^{-2t}\\-e^t&e^{-2t}
+		\end{pmatrix}=\begin{pmatrix}
+		e^t&4e^{-2t}\\-e^t&-2e^{-2t}
+		\end{pmatrix}=W' \]
+		\item[2. Schritt:] \[ W(s)^{-1}=\frac{1}{-e^{-s}}\begin{pmatrix}
+		e^{-2s}&2e^{-2s}\\e^s&e^s
+		\end{pmatrix}=-\begin{pmatrix}
+		e^{-s}&2e^{-s}\\e^{2s}&e^{2s}
+		\end{pmatrix} \]
+		\[ W(0)^{-1}=-\begin{pmatrix}
+		1&2\\1&1
+		\end{pmatrix},\quad W(0)^{-1}\binom{3}{1}=-\binom{5}{4} \]
+		\[ W(s)^{-1}B(s)=-\begin{pmatrix}
+		e^{-s}&2e^{-s}\\e^{2s}&e^{2s}
+		\end{pmatrix}\begin{pmatrix}
+		e^s\\2
+		\end{pmatrix}=\begin{pmatrix}
+		1+4e^{-s}\\e^{3s}+2e^{2s}
+		\end{pmatrix} \]
+		\[ \int_0^t W(s)^{-1}B(s)\dd s=\int_0^t \begin{pmatrix}
+		1+4e^{-s}\\e^{3s}+2e^{2s}
+		\end{pmatrix}\dd s=\begin{pmatrix}
+		t-4e^t+4\\\frac{1}{3}(e^{3t}-1)+e^{2t}-1
+		\end{pmatrix}
+			 \]
+		Also haben wir:
+		\[ u(t)=\begin{pmatrix}
+		e^t&-2e^{-2t}\\-e^t&e^{-2t}
+		\end{pmatrix}\left(\begin{pmatrix}
+		-5\\-4
+		\end{pmatrix}-\begin{pmatrix}
+		t-4e^{-t}+4\\\frac{1}{3}e^{3t}+e^{2t}-\frac{4}{3}
+		\end{pmatrix}\right) \]
+	\end{description}
+\end{beispiel*}
+\changesubsection
+\subsection{Exponentialfunktion einer Matrix}
+Sei $ A\in\K^{n\times n} $; ist $ e^A $ wohldefiniert? Versuche
+\[ e^A\coloneqq\sum_{m=0}^{\infty}\frac{A^m}{m!}. \]
+Auf $ \K^{n\times n} $ hat man die Norm $ \norm{B}\coloneqq\sqrt{\sum_{k,l=1}^{n}|b_{kl}|^2} $. Es gilt $ \norm{B_1B_2}\leq\norm{B_1}\norm{B_2} $. Hieraus folgt $ \norm{A^m}\leq\norm{A}^m $. $ \left(\sum_{m=0}^{p}\frac{A^m}{m!}\right)_p $ ist also eine Cauchyfolge und konvergiert somit.
+\begin{lemma}
+	\bullshit
+	\begin{enumerate}
+		\item $ A,B\in\K^{n\times n} $, $ AB=BA $. Dann
+		\[ e^{A+B}=e^Ae^B=e^Be^A. \]
+		Insbesondere ist $ e^{-A}e^A=E_n $ ($ n\times n- $Einheitsmatrix).
+		\item Ist $ A\in\K^{n\times n} $, $ S\in  GL(n,\K) $, so $ S^{-1}e^A S=e^{S^{-1}AS} $.
+		\item Ist $ D=\begin{pmatrix}
+		\lambda_1&\hdotsfor{1}&0\\\vdots&\ddots&\vdots\\
+		0&\hdotsfor{1}&\lambda_n
+		\end{pmatrix} $ mit $ \lambda_1,...,\lambda_n\in\K $, so
+		\[ e^D=\begin{pmatrix}
+		e^{\lambda_1}&\hdotsfor{1}&0\\\vdots&\ddots&\vdots\\0&\hdotsfor{1}&e^{\lambda_n}
+		\end{pmatrix}. \]
+		\item $ A\in\K^{n\times n} $, so ist $ W(t)=e^{At} $ Wronskimatrix zu $ y'=Ay $.
+	\end{enumerate}
+\end{lemma}
+\begin{beweis}
+	\begin{enumerate}
+		\item \[ \frac{(A+B)^m}{m!}=\frac{1}{m!}\sum_{\mu=0}^{m}\binom{m}{\mu}A^\mu B^{m-\mu}=\sum_{\mu=0}^{m}\frac{A^\mu}{\mu!}\frac{B^{m-\mu}}{(m-\mu)!} \]
+		Summiere \"uber alle $ m\in\N_0 $ und benutze Cauchy-Produkt-Regel.
+		\item $ S^{-1}\frac{A^m}{m!}S=\frac{(S^{-1}AS)^m}{m!} $
+		induktiv nach $ m $. Summiere \"uber alle $ m\in\N_0 $.
+		\item Betrachte $ \frac{D^m}{m!} $. Die Behauptung folgt direkt.
+		\item \[ e^{At}=\sum_{m=0}^{\infty}\frac{A^m}{m!}t^m,\quad \left(e^{At}\right)'=\sum_{m=1}^{\infty}\frac{A^m}{(m-1)!}t^{m-1}=A\sum_{m=1}^{\infty}\frac{(At)^{m-1}}{(m-1)!}=Ae^{At} \]
+	\end{enumerate}
+\end{beweis}
+Sei $ A $ diagonalisierbar, also $ \exists S\in GL(n,\K) $ mit \[ S^{-1}AS=D=\begin{pmatrix}
+\lambda_1\\&\ddots\\&&\lambda_n
+\end{pmatrix},\quad S^{-1}e^A S=e^D. \]
+Also $ e^A=Se^DS^{-1} $.
+\begin{beispiel*}
+	$ A=\begin{pmatrix}
+	-5&-6\\3&4
+	\end{pmatrix} $, $ S=\begin{pmatrix}
+	1&2\\-1&-1
+	\end{pmatrix} $, $ S^{-1}=\begin{pmatrix}
+	-1-2\\1&1
+	\end{pmatrix} $, $ D=\begin{pmatrix}
+	1&0\\0&-2
+	\end{pmatrix} $, $ e^D=\begin{pmatrix}
+	e&0\\0&e^{-2}
+	\end{pmatrix} $. Also:
+	\[ e^A=\begin{pmatrix}
+	1&2\\-1&-1
+	\end{pmatrix}\begin{pmatrix}
+	e&0\\0&e^{-2}
+	\end{pmatrix}\begin{pmatrix}
+	-1&-2\\1&1
+	\end{pmatrix}=\begin{pmatrix}
+	e&2e^{-2}\\-e&-e^{-2}
+	\end{pmatrix}\begin{pmatrix}
+	-1&-2\\1&1
+	\end{pmatrix}=\begin{pmatrix}
+	-e+2e^{-2}&-2e+2e^{-2}\\-e-e^{-2}&2e-e^{-2}
+	\end{pmatrix} \]
+	\[ e^{At}=S \begin{pmatrix}
+	e^t&0\\0&e^{-2t}
+	\end{pmatrix}S^{-1}=\begin{pmatrix}
+	-e^t+2e^{-2t}&-2e^t+2e^{-2t}\\-e^t-e^{-2t}&2e^t-e^{-2t}
+	\end{pmatrix} \]
+\end{beispiel*}
+Ist $ A $ allgemein und $ \K=\C $, so w\"ahle $ S\in GL(n,\C) $ mit \[ S^{-1}AS=A^J=\begin{pmatrix}
+A_1\\&\ddots\\&&A_r
+\end{pmatrix},\quad A_l=\begin{pmatrix}
+\lambda_l&n_{l,1}\\&\ddots&n_{l,k_l}\\&&\lambda_l
+\end{pmatrix}\in\C^{k_l\times k_l}, n_{l,1},...,n_{l,k_l}\in\lbrace 0,1\rbrace \]
+$ A_l=\lambda_l E_{k_l}+N_l $, $ N_l $ nilpotent: $ N^{k_l}_l=0 $.
+\[ e^{At}=Se^{A^Jt}S^{-1},\quad e^{A^Jt}=\begin{pmatrix}
+a^{A_1t}\\&\ddots\\&&e^{A_rt}
+\end{pmatrix} \]
+\[ e^{A_lt}=e^{\lambda_l E_{k_l}+N_lt}=e^{\lambda_l E_{k_l}t}e^{N_lt}=e^{\lambda_l t}\sum_{\lambda=0}^{k_l-1}\frac{N_l^\lambda}{\lambda!}t^\lambda \]
+\begin{beispiel*}
+	\[ A=\begin{pmatrix}
+	0&0&0&-8\\
+	1&0&0&16\\
+	0&1&0&-14\\
+	0&0&1&6
+	\end{pmatrix},\quad\chi_A(x)=|xE_4-A|=x^4-6x^3+14x^2-16x+8=(x-2)^2(x^2-2x+2) \]
+    \begin{align*}
+    &\eig(A,s)=\C \begin{pmatrix}
+    -4\\6\\-4\\1
+    \end{pmatrix}\\
+    &\eig(A,1+i)=\C \begin{pmatrix}
+    -4+4i\\8-4i\\-5+i\\1
+    \end{pmatrix}\\
+    &\eig(A,1-i)=\C \begin{pmatrix}
+    -4-4i\\8+4i\\-5-i\\1
+    \end{pmatrix}
+    \end{align*}
+    \[ (A-2e_4)^2=\begin{pmatrix}
+    4&0&-8&-16\\
+    -4&4&16&24\\
+    1&-4&-10&-12\\
+    0&1&2&2
+    \end{pmatrix},\quad v_4\coloneqq \begin{pmatrix}
+    2\\-2\\1\\0
+    \end{pmatrix}\in\sH(A,2) \]
+    \[ v_3=(A-2E_4)v_4=Av_4-2v_4,\quad Av_4=v_3+2v_4 \]
+    $ S\coloneqq(v_1,\bar v_1,v_3,v_4) $ erf\"ullt
+    \[ S^{-1}AS=A^J\coloneqq \begin{pmatrix}
+    1+i&0&0&0\\
+    0&1-i&0&0\\
+    0&0&2&1\\
+    0&0&0&2
+    \end{pmatrix}. \]
+    \[ e^{At}=S \begin{pmatrix}
+    e^{(1+i)t}&0&0&0\\
+    0&e^{(1-i)t}&0&0\\
+    0&0&e^{2t}&te^{2t}\\
+    0&0&0&e^{2t}
+    \end{pmatrix}S^{-1} \]
+\end{beispiel*}

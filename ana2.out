@@ -1,18 +1,3 @@
-\BOOKMARK [0][]{chapter.1}{1 Topologische Grundlagen}{}% 1
-\BOOKMARK [1][]{section.1.1}{1.1 Normierte Vektorr\344ume}{chapter.1}% 2
-\BOOKMARK [2][]{subsection.1.1.1}{1.1.1 Offene Mengen}{section.1.1}% 3
-\BOOKMARK [2][]{subsection.1.1.2}{1.1.2 Konvergente Folgen}{section.1.1}% 4
-\BOOKMARK [2][]{subsection.1.1.3}{1.1.3 Abgeschlossene und kompakte Mengen}{section.1.1}% 5
-\BOOKMARK [1][]{section.1.2}{1.2 Stetige Abbildungen}{chapter.1}% 6
-\BOOKMARK [0][]{chapter.2}{2 Differenziation in \040Rn }{}% 7
-\BOOKMARK [1][]{section.2.1}{2.1 Rechnen mit Ableitungen}{chapter.2}% 8
-\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Partielle und totale Differenzierbarkeit}{section.2.1}% 9
-\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 H\366here Ableitungen}{section.2.1}% 10
-\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Taylorentwicklung}{section.2.1}% 11
-\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 Lokale Extrema}{section.2.1}% 12
-\BOOKMARK [1][]{section.2.2}{2.2 Lokale Inverse und implizite Funktionen}{chapter.2}% 13
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Lokale Inverse}{section.2.2}% 14
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 S\344tze \374ber implizite Funktionen}{section.2.2}% 15
 \BOOKMARK [0][]{chapter.3}{3 Differentialgleichungen}{}% 16
 \BOOKMARK [1][]{section.3.1}{3.1 Definitionen und Beispiele}{chapter.3}% 17
 \BOOKMARK [1][]{section.3.2}{3.2 Lineare Differentialgleichungen erster Ordnung}{chapter.3}% 18
@@ -23,3 +8,5 @@
 \BOOKMARK [2][]{subsection.3.3.4}{3.3.4 Differentialgleichungen vom Typ \040y'=f\(at+by+c\) , \040a,b,cR, \040fC0\(R\) }{section.3.3}% 23
 \BOOKMARK [2][]{subsection.3.3.5}{3.3.5 Differentialgleichungen vom Typ \040y'=f\(yt\) , \040fC0\(R+\) }{section.3.3}% 24
 \BOOKMARK [2][]{subsection.3.3.6}{3.3.6 Differentialgleichungen vom Typ \040y'=f\(a1t+b1y+c1a2t+byt+c2\) , \040ak,bk,ckR, \040k=1,2 }{section.3.3}% 25
+\BOOKMARK [1][]{section.3.4}{3.4 Systeme linearer Differentialgleichhungen erster Ordnung}{chapter.3}% 26
+\BOOKMARK [2][]{subsection.3.4.1}{3.4.1 Exponentialfunktion einer Matrix}{section.3.4}% 27

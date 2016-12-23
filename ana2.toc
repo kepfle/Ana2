@@ -25,3 +25,5 @@
 \contentsline {subsection}{\numberline {3.3.4}Differentialgleichungen vom Typ $ y'=f(at+by+c) $, $ a,b,c\in \math@bb {R}$, $ f\in C^0(\math@bb {R}) $}{58}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Differentialgleichungen vom Typ $ y'=f\left (\frac {y}{t}\right ) $, $ f\in C^0(\math@bb {R}^+) $}{58}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6}Differentialgleichungen vom Typ $ y'=f\left (\frac {a_1t+b_1y+c_1}{a_2t+b_yt+c_2}\right ) $, $ a_k,b_k,c_k\in \math@bb {R}$, $ k=1,2 $}{59}{subsection.3.3.6}
+\contentsline {section}{\numberline {3.4}Systeme linearer Differentialgleichhungen erster Ordnung}{61}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Exponentialfunktion einer Matrix}{64}{subsection.3.4.1}
